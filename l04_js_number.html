@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>javaScript Number Type</title>
+</head>
+
+<body>
+    <h1>숫자와 부동 소수점을 포함하는 Number type</h1>
+    <p>number는 64비트의 부동 소수점인 숫자를 저장하는 기본 데이터 타입</p>
+    <ul>
+        <li>number가 안전하게 표현할 수 있는 최대 정수(MAX_SAFE_INTEGER)
+        <script>document.write(Number.MAX_SAFE_INTEGER);</script>
+        </li>
+        <li>number가 표현할 수 있는 최소 정수(MIN_SAFE_INTEGER)
+            <script>document.write(Number.MIN_SAFE_INTEGER);</script>
+        </li>
+        <li>javaScript가 표현할 수 있는 가장 큰 수
+            <script>document.write(Number.MAX_VALUE);</script>
+        </li>
+        <li>javaScript가 표현할 수 있는 가장 낮은 수
+            <script>document.write(Number.MIN_VALUE);</script>
+        </li>
+        <li>Number. 은 정수와 소수를 표현한 데이터 타입을 자바스크립트가 브라우저 동작시 생성한 객체</li>
+        <li>number는 총 63bit를 저장하고 분수는 0~51, 지수는 52~62, 부호(.)이 63에 저장된다.</li>
+        <li>0.2+0.1=
+            <script>document.write(0.2+0.1);</script>
+        </li>
+        <li>999999999999999999999999 =
+            <script>document.write(999999999999999999999999);</script>
+        </li> 
+        <li>let eNum= 567e8 : 
+            <!-- e8은 10의 8제곱이네 -->
+            <script>document.write(567e8);</script>
+        </li>
+        <li>let eNum= 567e-8 :
+        <script>document.write(567e-8)</script>
+        </li>
+
+
+
+        <article>
+            <h2>Number의 연산과 자동 형 반환</h2>
+            <p>숫자는 연산을 하기 위해 존재하고 자바스크립트의 숫자는 숫자가 아닌 것도 연산하기 위해 형변환을 시도한다.</p>
+            <ul>
+                <li>10+20 : <script>document.write(10+20)</script> </li>
+                <li>10+"20" : <script>document.write(10+"20")</script> </li>
+                <!-- + 계산식은 형변환을 안일으키네 문자열의 합연산이기도 하다보니 
+                    문자열의 합으로 우선 반응하는구나 반면 -는 형변환부터 됨.-->
+                <li>"10"+"20" : <script>document.write("10"+"20")</script></li>
+                <li>"A"+10+20 : <script>document.write("A"+10+20)</script></li>
+                <li>10+20+"A" : <script>document.write(10+20+"A")</script></li>
+                <li>1+false : <script>document.write(1+false)</script></li>
+                <li>1+true : <script>document.write(1+true)</script></li>
+                <li>1+null : <script>document.write(1+null)</script></li>
+                <li>1+undefiend : <script>document.write(1+undefined)</script></li>
+                <li>1+NaN : <script>document.write(1+NaN)</script></li>
+            </ul>
+            <hr>
+            <ul>
+                <li>10*20 : <script>document.write(10*20)</script> </li>
+                <li>10*"20" : <script>document.write(10*"20")</script> </li>
+                <!-- 곱은 또 변환이 되는군 
+                +연산을 제외한 나머지 연산은 문자열이 나올 시 자동으로 형변환을 우선 시도한다. 실패시 NaN이 뜬다.-->
+                <li>"10"*"20" : <script>document.write("10"*"20")</script></li>
+                <li>"A"*10+20 : <script>document.write("A"*10*20)</script></li>
+                <li>10*20*"A" : <script>document.write(10*20*"A")</script></li>
+                <li>1*false : <script>document.write(1*false)</script></li>
+                <li>1*true : <script>document.write(1*true)</script></li>
+                <li>1*null : <script>document.write(1*null)</script></li>
+                <li>1*undefiend : <script>document.write(1*undefined)</script></li>
+                <li>1*NaN : <script>document.write(1*NaN)</script></li>
+            </ul>
+
+
+
+            <article>
+                <h2>NaN: Not a Number</h2>
+                <p>숫자가 될 수 없는 것을 나타내는 NaN</p>
+                <ul>
+                    <li>Number("100"): data를 숫자로 형 변환</li>
+                    <li>Number("안녕"): 
+                        <script>document.write(Number("안녕"))</script></li>
+                    <li>Number(null)): 
+                        <script>document.write(Number(null))</script></li>
+                    <li>Number(undefined)): 
+                        <script>document.write(Number(undefined))</script></li>
+                    <li>Number(true)): 
+                        <script>document.write(Number(true))</script></li>
+                    <li>Number(false)): 
+                        <script>document.write(Number(false))</script></li>
+                    <li>isNaN("100") :
+                        <!-- "100"은 NaN이냐?는 질문에 아니다 숫자로 형변환 된다~! 라고 반환 -->
+                        <script>document.write(isNaN("100"))</script>
+                    </li>
+                    <li>isNaN("백") :
+                        <!-- "백"은 NaN이냐?는 질문에 응 NaN이야~! 변화안돼! 라고 반환 -->
+                        <script>document.write(isNaN("백"))</script>
+                    </li>
+                    <li>Boolean(NaN) :
+                        <!-- "NaN"은 NaN이냐?는 질문에 아니다 숫자로 형변환 된다~! 라고 반환 -->
+                        <script>document.write(Boolean(NaN))</script>
+                    </li>
+                </ul>
+            </article>
+        </article>
+    </ul>
+    <article>
+        <h2>입력 요소에서 입력 받은 value가 숫자인지 검사하기</h2>
+        1. 1~120까지의 숫자만 받고 다른 숫자가 넘어올 경우 1~120까지 숫자만 입력하세요 창띄우기
+        okay
+        <!-- 그러면 121부터는 false가 되도록?? 불린-->
+        2. 숫자가 될 수 없는 문자열이 넘어올 경우 숫자만 다시 입력하세요. 출력
+        <!-- 위에서 숫자열 변환 체크 함수인  number 사용하여서? -->
+        3. Date클래스에서 브라우저가 실행중인 해 받아오기
+        okay
+        <!-- let year= new Date().getFullyear(); -->
+        4. onkeydown으로 입력받은 값이 숫자가 아니면 입력할 수 없게하라. (두번재 미션)
+        event.keyCode를 이용하라고?? 뭔소리..
+        다시 다운 말고 키 업으로 하라고??? 흠 일다 ㄴ킵
+        <ul>
+            <li>
+                태어난 해: 현재 해 - 나이 + 1
+                <input type="text" name="age" value="" placeholder="나이를 입력하세요."
+                onchange="birthdayAlert(event)">
+                <!-- 이벤트를 입력하겠다는 것은 뭐지? 경고창을 event로 받겠다는건가 맞네 -->
+                <span id="ageTest" style="color:red"></span>
+<script>
+    function birthdayAlert(xxxxx){
+        let that1= xxxxx.target.value;
+        let that2= new Date().getFullYear();
+        if(that1<=120){
+            alert("당신이 태어난 해는 :"+(that2-xxxxx.target.value+1)+"입니다.")
+        }else if{
+            
+        }
+        else{
+            alert("1~120까지의 숫자만 입력하세요.")
+        }
+        // 아.. 가운데 ()로 묶어주는 것도 신경 쓰자, 근데  target은 뭐지?
+    }
+    console.log(new Date());
+</script>
+            </li>
+        </ul>
+    </article>
+</body>
+
+</html>
