@@ -110,41 +110,126 @@
         <h2>입력 요소에서 입력 받은 value가 숫자인지 검사하기</h2>
         1. 1~120까지의 숫자만 받고 다른 숫자가 넘어올 경우 1~120까지 숫자만 입력하세요 창띄우기
         okay
-        <!-- 그러면 121부터는 false가 되도록?? 불린-->
+        <!-- 그러면 121부터는 false가 되도록?? 조건문-->
         2. 숫자가 될 수 없는 문자열이 넘어올 경우 숫자만 다시 입력하세요. 출력
-        <!-- 위에서 숫자열 변환 체크 함수인  number 사용하여서? -->
+        <!-- 데이터 타입이 숫자인지 확인하여?? -->
         3. Date클래스에서 브라우저가 실행중인 해 받아오기
         okay
         <!-- let year= new Date().getFullyear(); -->
         4. onkeydown으로 입력받은 값이 숫자가 아니면 입력할 수 없게하라. (두번재 미션)
-        event.keyCode를 이용하라고?? 뭔소리..
-        다시 다운 말고 키 업으로 하라고??? 흠 일다 ㄴ킵
+                event.keyCode를 이용하라고?? 뭔소리..
+                다시 다운 말고 키 업으로 하라고??? 흠
+        
         <ul>
             <li>
                 태어난 해: 현재 해 - 나이 + 1
                 <input type="text" name="age" value="" placeholder="나이를 입력하세요."
                 onchange="birthdayAlert(event)">
-                <!-- 이벤트를 입력하겠다는 것은 뭐지? 경고창을 event로 받겠다는건가 맞네 -->
+                <!-- 이벤트를 입력하겠다는 것은 뭐지? 경고창을 event로 받겠다는건가 맞네
+                함수에 target없이도 결과는 똑같은데 보통 이렇게 하나보지..? 무슨차이??-->
                 <span id="ageTest" style="color:red"></span>
 <script>
     function birthdayAlert(xxxxx){
         let that1= xxxxx.target.value;
         let that2= new Date().getFullYear();
         if(that1<=120){
-            alert("당신이 태어난 해는 :"+(that2-xxxxx.target.value+1)+"입니다.")
-        }else if{
-            
+            alert("당신이 태어난 해는 :"+(that2-xxxxx.target.value+1)+"입니다.");
+        } else if (isNaN(that1) == true){
+            alert("숫자만 입력하세요.");
         }
         else{
-            alert("1~120까지의 숫자만 입력하세요.")
+            alert("1~120까지의 숫자만 입력하세요.");
         }
-        // 아.. 가운데 ()로 묶어주는 것도 신경 쓰자, 근데  target은 뭐지?
+        // 아.. 가운데 문자열 아닌 녀석들 ()로 묶어주는 것도 신경 쓰자
+        // 그리고 true 에는 따음표 안붙이는구나..
     }
-    console.log(new Date());
+    // console.log(new Date()); new Date ㅇㅋㅇㅋ
 </script>
             </li>
         </ul>
-    </article>
+
+
+
+
+
+        <h3>오류 예시
+            :input에 입력된 값은 모두 문자로 반환되기 때문에 모든경우에 typeof that1 = string 
+            실제 consolelog로 찍어보면 확인가능
+        </h3>
+        <ul>
+            <li>
+                태어난 해: 현재 해 - 나이 + 1
+                <input type="text" name="age" value="" placeholder="나이를 입력하세요."
+                onchange="birthdayAlert(event)">
+                <!-- 이벤트를 입력하겠다는 것은 뭐지? 경고창을 event로 받겠다는건가 맞네
+                함수에 target없이도 결과는 똑같은데 보통 이렇게 하나보지..? 무슨차이??-->
+                <span id="ageTest" style="color:red"></span>
+<script>
+    function birthdayAlert(xxxxx){
+        let that1= xxxxx.target.value;
+        let that2= new Date().getFullYear();
+        console.log(typeof that1)
+        if(that1<=120){
+            alert("당신이 태어난 해는 :"+(that2-xxxxx.target.value+1)+"입니다.");
+        } else if (typeof that1 == 'number'){
+            alert("1~120까지의 숫자만 입력하세요.");
+        }
+        else{
+            alert("숫자만 입력하세요.");
+        }
+    }
+    
+</script>
+            </li>
+        </ul>
+
+
+
+
+
+        <h3>오류에 대한 도전.. 그러나 실패예시
+            :input에 입력된 값은 모두 문자로 반환되기 때문에 모든경우에 typeof that1 = string 
+            그렇다면 that1*1을 주면 연산을 위해 형변환이 먼저 일어나기 때문에 형변환이 가능한 수라면?
+            타입에 number로 잡히게 될 것이다 한번 트라이 ㄱㄱ
+        </h3>
+        <ul>
+            <li>
+                태어난 해: 현재 해 - 나이 + 1
+                <input type="text" name="age" value="" placeholder="나이를 입력하세요."
+                onchange="birthdayAlert(event)">
+                <!-- 이벤트를 입력하겠다는 것은 뭐지? 경고창을 event로 받겠다는건가 맞네
+                함수에 target없이도 결과는 똑같은데 보통 이렇게 하나보지..? 무슨차이??-->
+                <span id="ageTest" style="color:red"></span>
+<script>
+    // console.log(typeof "1"*1) : NaN
+    // console.log(typeof ("1"*1)) :number
+    // console.log(typeof (NaN)) :number (타입은 숫자인 데이터가 오류났을 때 NaN인가보구나)
+    // console.log(typeof ("www"*1)) : number
+    // 곱연산인 *1 때문에 말도안되는 문자열과의 곱 역시 타입은 기본적으로 수로 가져가서 
+    // ()의 결과는 NaN이 되고 타입을 검색하면 number가 된다. 
+    // 이때 곱연산 * 가 없었다면 이와같은 상황은 벌어지지 x
+    
+    function birthdayAlert(xxxxx){
+        let that1= xxxxx.target.value;
+        let that2= new Date().getFullYear();
+        // console.log(typeof that1)
+        let that3= that1*1;
+        // console.log(typeof that3)
+        // 이건 또 왜 죄다 넘버로 뜨지???????????????????????????????
+        
+        if(that1<=120){
+            alert("당신이 태어난 해는 :"+(that2-xxxxx.target.value+1)+"입니다.");
+        } else if (typeof (that1*1) == 'number'){
+            alert("1~120까지의 숫자만 입력하세요.");
+        }
+        else{
+            alert("숫자만 입력하세요.");
+        }
+    }
+    // typeof that*1 로 적으면 제대로 안읽히네.. ()를 넣어줘야하네 그건 왜그렇지??????????????
+</script>
+            </li>
+        </ul>
 </body>
 
 </html>

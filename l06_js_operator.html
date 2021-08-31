@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>js number and operators</title>
+</head>
+
+<body>
+    <h1>자바스크립트의 숫자와 연산</h1>
+    <h2>산술 연산자</h2>
+    <!-- table>(thead>tr>th{operator}+th{이름}+th{설명}+th{예시})+tbody>(tr>td*4)*6 -->
+    <table>
+        <thead>
+            <tr>
+                <th>operator</th>
+                <th>이름</th>
+                <th>설명</th>
+                <th>예시</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>+</td>
+                <td>더하기</td>
+                <td>두수를 더한다</td>
+                <td>6.8+4.2</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>빼기</td>
+                <td>왼쪽을 오른쪽수로 뺀다</td>
+                <td>6.8-4.2</td>
+            </tr>
+            <tr>
+                <td>*</td>
+                <td>곱하기</td>
+                <td>두수를 곱한다</td>
+                <td>10.3*20</td>
+            </tr>
+            <tr>
+                <td>/</td>
+                <td>나누기</td>
+                <td>왼쪽을 오른쪽수로 나눈다.</td>
+                <td>20/3</td>
+            </tr>
+            <tr>
+                <td>%</td>
+                <td>나머지</td>
+                <td>왼쪽을 오른쪽수로 나눈 나머지</td>
+                <td>20%3 = 
+                    <script>document.write(20%3);</script>
+                </td>
+                
+            </tr>
+            <tr>
+                <td>**</td>
+                <td>거듭제곱</td>
+                <td>왼쪽을 오른쪽수만큼 거듭제곱한다.</td>
+                <td>5**3 = 
+                    <script>document.write(5**3);</script>
+                    <script>document.write(Math.pow(5,3));</script>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br><br>
+    <h2>할당 연산자와 증가 및 감소 연산자</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>operator</th>
+                <th>이름</th>
+                <th>설명</th>
+                <th>예시</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>a+=b</td>
+                <td>추가할당</td>
+                <td>a=a+b : 자신에게 자신+b의 값을 대입한다.</td>
+                <td>x+=10 : x=x+10</td>
+            </tr>
+            <tr>
+                <td>a-=b</td>
+                <td>빼기할당</td>
+                <td>a=a-b</td>
+                <td>x-=10 : x=x-10</td>
+            </tr>
+            <tr>
+                <td>a*=b</td>
+                <td>곱셈할당</td>
+                <td>a=a*b</td>
+                <td>x*=10 : x=x*10</td>
+            </tr>
+            <tr>
+                <td>a/=b</td>
+                <td>분할할당</td>
+                <td>a=a/b</td>
+                <td>x/=10 : x=x/10</td>
+            </tr>
+            <tr>
+                <td>++a; , --a;</td>
+                <td>증가 및 감소 연산자</td>
+                <td>a=a+1 , a=a-1 숫자 앞에 증가 및 감소 연산자(++, --)가 오면 <br>
+                    연산을 먼저하고 다른실행을 옮긴다.</td>
+                <td>function1(++i); : i를 증가시키고 function1을 실행</td>
+            </tr>
+            <tr>
+                <td>a++; , a--;</td>
+                <td>증가 및 감소 연산자</td>
+                <td>a=a+1 , a=a-1 숫자 뒤에 증가 및 감소 연산자(++, --)가 오면 <br>
+                    다른실행을 먼저한 뒤 연산을 한다.</td>
+                <td>function1(i++); : function1을 실행시키고 i를 1 증가</td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br><br>
+    <h2>비교 연산자</h2>
+    <p>참과 거짓을 테스트하는 비교 연산자</p>
+    <table>
+        <thead>
+            <tr>
+                <th>operator</th>
+                <th>이름</th>
+                <th>설명</th>
+                <th>예시</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>==</td>
+                <td>동등</td>
+                <td>a와 b의 값이 같음(을 비교)</td>
+                <td>10==6+4
+                    <script>document.write(10==(6+4));</script>
+                </td>
+            </tr>
+            <tr>
+                <td>!=</td>
+                <td>비동등</td>
+                <td>a와 b의 값이 같지 않음</td>
+                <td>10!=6+4
+                    <script>document.write(10==(6+4));</script>
+                </td>
+            </tr>
+            <tr>
+                <td>a===b</td>
+                <td>엄격한 동등</td>
+                <td>a와 b가 완전히 같음(value, type모두 고려)</td>
+                <td>10===new Number(6+4) : <script>document.write(10===new Number(6+4))</script><br>
+                10===new Number(6)+4 : <script>document.write(10===new Number(6)+4)</script><br>
+                10==new Number(6+4) : <script>document.write(10==new Number(6+4))</script>
+
+                </td>
+            </tr>
+            <tr>
+                <td>a!==b</td>
+                <td>엄격한 비동등</td>
+                <td>a와 b가 완전히 같지는 않음(value, type모두 고려)</td>
+                <td>10!==new Number(6+4) : <script>document.write(10!==new Number(6+4))</script><br>
+                10!==new Number(6)+4 : <script>document.write(10!==new Number(6)+4)</script><br>
+                10!==new Number(6+4) : <script>document.write(10!==new Number(6+4))</script>
+
+                </td>
+            </tr>
+            <tr>
+                <td>a&lt;b</td>
+                <td>미만(작다)</td>
+                <td>a가 b보다 작다</td>
+                <td> 5 &lt; 3 : false</td>
+            </tr>
+            <tr>
+                <td>a&gt;b</td>
+                <td>초과(크다)</td>
+                <td>a가 b보다 크다</td>
+                <td> 5 > 3 : true</td>
+            </tr>
+            <tr>
+                <td>a&lt;=b</td>
+                <td>이하(작거나 같다))</td>
+                <td>a가 b보다 작거나 같다</td>
+                <td> 5 &lt;= 3 : false</td>
+            </tr>
+            <tr>
+                <td>a&gt;=b</td>
+                <td>이상(크거나 같다)</td>
+                <td>a가 b보다 크거나 같다</td>
+                <td> 5 >= 3 : true</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>내장객체 Math의 전역변수와 함수를 알아보자</h2>
+        <script>document.write(Math.PI)</script>
+</body>
+
+</html>

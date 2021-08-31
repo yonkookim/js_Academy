@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <main>
+        <h1>Number 객체의 전역 변수와 함수</h1>
+        <p>기본데이터 타입인 number(숫자)는 Number라는 타입의 객체를 가진다.
+            이때 기본 데이터 타입을 보조하기 위해 Number가 내장객체
+            (new 연산자 없이 사용할 수 있는 객체, 메모리에 이미 할당되어 있는 객체)로 존재하며
+            다양한 전역변수(어디든 사용)와 메소드를 제공하고 있다.
+        </p>
+ <script>
+     // new : 객체를 생성하겠다
+// ClassName() : 생성자(new 연산자로 객체를 생성할 때 꼭 호출해야 한다.)
+
+let     newNumObject = new Number(11); // 기본 데이터 타입인 11보다 더 많은 정보를 가지고 있다.
+console.log(newNumObject);
+console.log(newNumObject*11);
+console.log(newNumObject==11); // == : value를 비교
+console.log(newNumObject===11); // == : 엄격히 value와 type을 비교
+console.log(Number.MAX_SAFE_INTEGER); // 이처럼 새로 객체를 생성하지 않아도 존재하는 변수를 전역속성이라한다?
+console.log(new Number().constructor.MAX_SAFE_INTEGER); 
+// 이녀석도 safety integer가 존재한다 new Number(11) 콘솔 찍어보면 찾는 루트 역시 검색 할 수 있음.
+
+// 전역변수에 존재하는 객체(좀.. 변수라는것에 대해 다르게 이해하고있는데 설명 없이 그냥가는거 뭐냐;;..) 
+// 는 모두 new 연산자로 생성할 수 있는 객체에 포함된다.
+// 전역변수란 자주 사용되는 변수를 생성하는 개념이기 때문에 모두 만들진 않는다
+// 이때 new연산자로 존재하는 객체는 전역변수보다 더 많은 데이터를 가지므로 무겁고 사용하기 부담된다.
+// 기본 데이터 타입은 아주 자주 사용되는 타입이기 때문에 대부분 굳이 new연산자 없이
+// 내장객체에 바로 전역변수를 사용한다.
+
+ </script>
+        <h2>내장객체 Number의 전역변수</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>변수명 (property)</th>
+                    <th>설명</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Number.MAX_VALUE</td>
+                    <td>넘버가 표현 가능한 가장 큰수(e308)</td>
+                        <script>document.write(Number.MAX_VALUE)</script>
+                </tr>
+                <tr>
+                    <td>Number.MIN_VALUE(수)</td>
+                    <td>넘버가 표현 가능한 가장 큰수(e-324)</td>
+                        <script>document.write(Number.MIN_VALUE)</script>
+                </tr>
+                <tr> <td>Number.NaN</td>
+                    <td>숫자가 아님의 값을 검사(하지만 type Number), 수가 아닌 것을 연산할 때
+                        :예) "십"*10 = <script>document.write("십"*10)</script></td></tr>
+                <tr><td>Number.MAX.SAFE_INTEGER(정수)</td>
+                    <td>넘버가 표현 가능한 가장 큰정수(정확히 표현할 수 있는 최대 정수)</td>
+                        <script>document.write(Number.MAX_SAFE_INTEGER)</script></tr>
+                <tr><td>Number.MIN.SAFE_INTEGER(정수)</td>
+                    <td>넘버가 표현 가능한 가장 작은정수(정확히 표현할 수 있는 최소 정수)</td>
+                        <script>document.write(Number.MIN_SAFE_INTEGER)</script></tr></tr>
+                <tr></tr>
+                <tr></tr>
+            </tbody>
+        </table>
+        <h2>Number 내장객체의 메소드</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- tr*6(td{Number.}+td{<script></script>}) -->
+                
+                <tr>
+                    <td>Number.isNaN()</td>
+                    <td>
+                         NaN-> true, 숫자-> false<br>
+                        예)Number.isNaN(""십"*1")=<script>document.write(Number.isNaN("십"*1))</script><br>
+                        예)Number.isNaN(10/0)=<script>document.write(Number.isNaN(10/0))</script>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Number.isFinite()</td>
+                    <td>
+                         유한-> true, 무한-> false<br>
+                        예)Number.isFinite(10/0)=<script>document.write(Number.isFinite(10/0))</script><br>
+                        예)Number.isFinite(10/1)=<script>document.write(Number.isFinite(10/1))</script><br>
+                        예)Number.isFinite(0/0)=<script>document.write(Number.isFinite(0/0))</script>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Number.isSafeInteger()</td>
+                    <td>
+                         안전한 정수-> ture 불안전한 정수-> false<br>
+                         예)Number.isSafeInteger(9e+20)=<script>document.write(Number.isSafeInteger(9e+20))</script><br>
+                         예)Number.isSafeInteger(9e+15)=<script>document.write(Number.isSafeInteger(9e+15))</script>
+                        </td>
+                </tr>
+                <tr>
+                    <td>Number.isInteger</td>
+                    <td>
+                        정수-> ture 정수가 아닌수-> false<br>
+                        예)Number.isInteger(Math.Pi))=<script>document.write(Number.isInteger(Math.Pi))</script><br>
+                        예)Number.isInteger(-222))=<script>document.write(Number.isInteger(-222))</script><br>
+                        예)Number.isInteger(true))=<script>document.write(Number.isInteger(true))</script><br>
+                        예)Number.isInteger(-222.0000000000001))=<script>document.write(Number.isInteger(-222.0000000000001))</script><br>
+                        예)Number.isInteger(-222.00000000000001))=<script>document.write(Number.isInteger(-222.00000000000001))</script><br>
+                        예)Number.isInteger(-222.0))=<script>document.write(Number.isInteger(-222.0))</script></td>
+                </tr>
+                <tr>
+                    <td>Number.parseFloat()</td>
+                    <td>
+                        문자열에 부동소수를 찾아서 소수점 숫자를 반환(문자열 앞의 소수를 찾아서 부동소수로 반환)<br>
+                        예)Number.parseFloat("3.14alfjijiaei"))=<script>document.write(Number.parseFloat("3.14alfjijiaei"))</script><br>
+                        예)Number.parseFloat(" 3.14alfjijiaei"))=<script>document.write(Number.parseFloat(" 3.14alfjijiaei"))</script><br>
+                        예)Number.parseFloat("alfjijiaei3.14"))=<script>document.write(Number.parseFloat("alfjijiaei3.14"))</script><br>
+                        예)Number.parseFloat("alfjijiaei"))=<script>document.write(Number.parseFloat("alfjijiaei"))</script><br>
+                        예)Number.parseFloat("314e-2"))=<script>document.write(Number.parseFloat("314e-2"))</script><br>
+                        예)Number.parseFloat(Math.Pi))=<script>document.write(Number.parseFloat(Math.Pi))</script>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Number.parseInt()</td>
+                    <td>
+                        문자열에 정수를 찾아서 반환<br>
+                        예)Number.parseInt("3.14alfjijiaei"))=<script>document.write(Number.parseInt("3.14alfjijiaei"))</script></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+
+</html>

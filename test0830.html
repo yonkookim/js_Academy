@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <article>
+    <h2>입력 요소에서 입력 받은 value가 숫자인지 검사하기</h2>
+    <ul>
+      <li>
+        <input type="text" name="age" value="" placeholder="나이를 입력하세요"
+          onchange="userAge(event)">
+        <script>
+          // 1~120 까지 숫자만 받고 (다른 수가 넘어 올 경우 1~120 까지 숫자만 입력하세요.)
+          //숫자가 될 수 없는 문자열이 넘어 올 경우 숫자만 다시 입력하세요. 출력
+          function userAge(e){
+            let date = new Date();
+            let year = date.getFullYear();
+            let eVal = e.target.value;
+            let textSting = "";
+            if(eVal >= 1 && eVal <= 120){
+              return console.log(year - eVal + 1);
+            }else if(isNaN(eVal) == true){
+              console.log("문자만 입력하세요.");
+            }else{
+              console.log("1~ 120 사이 입력하세요.");
+            }
+          }
+        </script>
+      </li>
+      <li>
+        <input type="text" name="age" value="" placeholder="나이를 입력하세요"
+          onkeyup="userAge2(event)">
+        <script>
+          function userAge2(e){
+            let date = new Date();
+            let year = date.getFullYear();
+            let eVal = e.target.value;
+            let textSting = "";
+
+            if(e.keyCode >= 48 && e.keyCode <= 57 || e.keyCode >= 96 && e.keyCode <= 105){
+              if(eVal >= 1 && eVal <= 120){
+                return console.log(year - eVal + 1);
+              }else{
+                alert("1~ 120 사이 입력하세요.");
+              }
+            }else{
+              alert("문자만 입력하세요.");
+            }
+          }
+        </script>
+      </li>
+    </ul>
+  </article>
+</main>
+</body>
+</html>
