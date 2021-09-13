@@ -1,0 +1,111 @@
+ㅇ<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>js JSON</title>
+</head>
+
+<body>
+    <main>
+        <h1>JSON(JavaScript Object Notation)</h1>
+        <ul>
+            <li>자바스크립트의 객체 표현법</li>
+            <li>JSON은 문자열로 표현될 수 있다.</li>
+            <li>아주 가벼운 경량 데이터 교환 방식으로 문자열로만 이루어진다.(모든 프로그래밍 언어에 독립적(사용가능)이다.)</li>
+            <li>데이터를 주고받기 위해서 사용된다.</li>
+        </ul>
+        <article>
+            <h2>JSON작성법</h2>
+            <ul>
+                <li>JSON : "{}"</li>
+                <li>const jsonData= "{}"";</li>
+                <li>const jsonData= "{key:value, key2:value}"; 이때 key의 이름은 중복될 수 없다.</li>
+                <li>const jsonData= "{\"key\":\"value\", \"key2\":\"value\"}""; 이처럼 문자열로 이뤄진 데이터 형식이기 때문에 
+                    기본데이터 타입(문자열, 숫자, 논리, null,... )과 배열을 제외하고 모두 문자열로 작성(?)</li>
+                <li>json형식의 문자열을 자바스크립트에서 JSON.parse로 Object타입으로 변경한다.</li>
+                <li>Object타입으로 변경된 json의 key는 property로서 .으로 접근 가능하다. : jsonData.key</li>
+                <li>프로그래밍에서 key가 유동적으로 바뀌는 상황에서는(?) 다음같이 접근 가능 : jsonData["key"]</li>
+<script>
+   //실제 데이터 주고받을 때 쓰이는 JSON(문자열), 즉 진짜 JSON데이타
+    const data='{"name":"김용구","age":"34","marry":"true","family":["엄마","아빠","누나","형","아내"]}'
+    console.log(data.name);
+    console.log(data["age"]);  //이건 undefined가 뜨네
+
+    const jsonData2=JSON.parse(data);
+    console.log(jsonData2.name);
+    console.log(jsonData2["age"]);
+
+    //그럼 이건 실제 json이 아니면 뭐라는 얘기??? 다음 아티클에서 학습!!
+    const jsonData={"name":"김용구","age":"34","marry":"true","family":["엄마","아빠","누나","형","아내"]}//리터럴 작성방식
+    console.log(jsonData.name);
+    console.log(jsonData["age"]); //이건 데이타를 제대로 얻네
+    document.write(jsonData["age"]); //이것도 출력은 되네
+
+</script>
+
+    <article>
+        <h2>자바스크립트가 JSON을 대하는 태도</h2>
+        <ul>
+            <li>new Object()로 생성되는 것을 json이라 한다.</li> <!--여기서 object는 대상화된 것, 즉 함수에서 보면 이름을 의미-->
+            <li>자바스크립트에서의 json은 new Object()의 property에 대한 깔끔한 설명서 역할을 할수 있다.(아래처럼 console찍어보면 확인가능)</li>
+            <li>이러하여 자바스크립트에서 따왔으니 json(JavaScript Object Notation)으로 명명하고 쓰기 시작한 것.</li>
+            <li>"{ 'key': 'value' }" : 문자열로 표현된 json, 실제 서버로 보내고 받는 데이터</li>
+            <li>자바스크립트에서 json에 기본데이터 타입처럼 리터럴한 방식을 제공한다.</li>
+            <li>{ key: value } : 자바스크립트에서 지원하는 리터럴 방식의 json, 서버로 보내고 받는데 쓰이지 X</li>
+            <li>자바스크립트는 함수지향언어(자바에서 쓰이는 클래스를 안쓴다는 의미)로, 함수를 new연산자를 이용하여 객체로 선언할 수 있다.</li>
+            <li>얼핏.. 객체로 선언한다는 것은 음.. 대상화(let, const들이 하는 것 처럼?) 한다는 것과 비슷한 얘기인건가?</li>
+            <li>function Person(name, age){this.name=name, this.age=age} 에 대하여...
+                <br> new Person("최경민", 36) 이처럼 객체로 선언하면 그 json의 데이터를 console.log로 확인했을 때
+                <br> person{name:"최경민", age:36} 로 그 데이타가 뜨는 것을 확인 할 수 있다.
+                <br> 다만 아직 자바스크립트는 JSON의 출력을 지원하고있지 않은데 걱정마라~ 출력을 할 수 있도록 돕는 함수(는 따로있다.</li>
+            <li>다시금 정리하면 , 자바스크립트 객체(new연산자를 통해 생성된 대상)의 property에 대한 문자열의 (정리가 잘 된) 데이타를 json이라 한다.</li>
+        </ul>
+    </article>
+<script>
+    //new 연산자를 통해 객체로 생성할 함수의 이름은 대문자로 작성하는 약속(필수는 아니나 권장.)
+    function Person(name,age,marry){
+        this.name=name; 
+        this.age=age; 
+        this.marry=marry;
+    }
+    console.log(new Person("최경민",36,true)); 
+    const person1=new Person("최경민",36,true); //이때 person1 이 json인거지 뭐.. 맞나?
+
+    // person {name: '최경민', age: 36, marry: true} 으로 문자열로 정보가 뜨는 것을 확인할 수 있다.
+    //이 정보, 명세서가 너무 보기 좋더라 충분히 객체라 할만하더라...
+
+    document.write(new Person("최경민",36,true)) // 아직  JSON은 출력을 지원받지 못한다. 오브젝트 오브젝트 뜨는것을 확인할 수 있다.
+    // 근데 리버럴 방식의 JSON 은 출력도 되는데? 음... 그래서 진짜 JSON 이 아니라는 건가
+</script>
+
+    <article>
+        <h2>자바스크립트에서 json 사용하는 법</h2>
+        <ul>
+            <li>작성법1 : function ObjectName(value, value2){this.key=value; this.key2=value2}</li> <!--위에 스크립트에서 보듯이-->
+            <li>작성법1.5 : function ObjectName(key, key2){this.key; this.key2;}</li> 
+
+            <li>작성법2(리터럴 방식) : {key:value; key2:value2} 이때 this를 value안에 활용할 수 없다. this는 블럭이 아닌 윈도우를 가리킨다.
+                <br> but 함수에서 this 사용시엔 블럭객체를 가리킨다. 예)-> {key:value, key2:function(){return this.key+this.key2}} 이때 key2는 함수.
+            </li> 
+
+            <li>작성법3: const json = new Object(); json.key=value; json.key2=value2;</li>
+            <li>작성법 1,2 권장되며 3은 권장되지 X </li>
+            <li><pre>
+function Person(name,age,marry){
+    this.name=name; 
+    this.age=age; 
+    this.marry=marry;
+}
+            </pre></li>
+            <li>const person1 = new Person("최경민",36,true) => JSON person1을 출력 : <script>document.write(person1)</script></li>
+            <li>json은 toString()을 매번 재정의 해야하기 때문에 출력되지 않는다. 따라서 다음과같이 JSON.stringify 를 이용하여...</li>
+            <li>const person1 = new Person("최경민",36,true) => JSON person1을 출력 : <script>document.write(JSON.stringify(person1))</script></li>
+            <li>JSON.stringify()로 출력된 문자열을 서버통신에 json으로 사용하면 된다.</li>
+        </ul>
+    </article>
+            </ul>
+        </article>
+    </main>
+</body>
+</html>

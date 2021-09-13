@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>js loop iteration</title>
+</head>
+
+<body>
+    <h1>자바 스크립트의 루프와 반복</h1>
+    <p>for, for in, for of, while, dowhile</p>
+    <p>반복문 : 같은 명령을 반복하여 실행할 때 사용. 검사식에서 많이 사용됨.</p>
+    <article>
+        <h2>for 반복문</h2>
+        <p>for( 초기문 ; 조건문 ; 증감문){반복실행} : for는 조건이 true일때 반복 실행한다.</p>
+        <script>
+           
+            for(n=0; n<10; n++){ //let이 for안에 있으면 n=0만 주구장창 반복이겠지
+                console.log(`n : ${n}`);
+            }
+        </script>
+        <ul>
+        <li>
+            [-20,0,2,1,11,20,3,13]의 max : 
+<script>
+    let arr1= [-20,0,2,1,11,20,3,13];
+    let max=-Infinity; //아 어떤 작은 변수 하나를 선언하고 배열의 녀석들과 계속 비교하면서 큰놈을 맥스주면.. 맥스겟!
+    for(let i=0; i<arr1.length; i++){
+        if(max<arr1[i]){
+            max=arr1[i];
+        } 
+        console.log(`arr1[i] : ${arr1[i]} / max : ${max}`)
+        // else{   필요X   }
+    }
+    console.log(`arr1.max : ${max}`);
+</script>
+
+<p>과제!!!!!! 위의 배열 [-20,0,2,1,11,20,3,13]을 내림차순정렬 정렬(버블정렬, 밀어내기정렬)하세요.</p>
+        
+<script>
+    //arr1에서 max를 발견하면 그값을 삭제하고 arr2에 순서대로 담는방법,  let arr2= [];
+    //arr1에서  max를 발견하면 그 값을 맨앞으로 돌리고 맨앞을 제외하고 다시 max찾기.. 이건 안좋은데?
+    //버블정렬(밀어내기정렬) : 0, 1 비교 후 큰 수를 앞으로 1,2 비교후 큰수를 앞으로 반복.... 가장 작은녀석이 맨 뒤로 가게된다. ㅇㅋ
+    
+    for(let i=0; i<arr1.length; i++){ 
+        //음~ for구문 안에 i가 없어도 걍 실행구문 안의 반복문을 i=0일때 실행(이때 가장 작은 값이 맨 뒤로), 
+        // i=1일때 실행(이때 두번째로 작은 값이 맨 뒤에서 한칸 앞으로, 즉 자기 자리로), ... 반복하면 모두가 자기 자리로
+        console.log(arr1);
+        for(let j=0; j<arr1.length-1; j++){
+        if(arr1[j]<arr1[j+1]){
+            let temp=arr1[j];
+            arr1[j]=arr1[j+1];
+            arr1[j+1]=temp;
+        }
+    }
+}
+</script>
+
+
+
+
+
+<p>과제!!!!!! 위의 배열 [-20,0,2,1,11,20,3,13]을 오름차순정렬 정렬하세요.</p>
+
+<script>
+    
+    for(let i=0; i<arr1.length; i++){ 
+        //음~ for구문 안에 i가 없어도 걍 실행구문 안의 반복문을 i=0일때 실행(이때 가장 작은 값이 맨 뒤로), 
+        // i=1일때 실행(이때 두번째로 작은 값이 맨 뒤에서 한칸 앞으로, 즉 자기 자리로), ... 반복하면 모두가 자기 자리로
+        
+        for(let j=0; j<arr1.length-1; j++){
+        if(arr1[j]>arr1[j+1]){
+            let temp=arr1[j];
+            arr1[j]=arr1[j+1];
+            arr1[j+1]=temp;
+        }
+    }
+}
+</script>
+
+
+
+
+<p>과제!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! [-20,0,2,1,11,20,3,13]
+    전체중에 가장 높은 값의 위치를 찾아서 맨 앞자리와 바꾸세요
+    맨 앞자리를 제외하고 제일 높은 값을 찾아서 맨 앞자리 바로 뒤랑 바꾸세요.
+    이렇게 반복 해서 선택정렬 해보세요.
+</p>
+
+<script>
+arr2=[-20,0,2,1,11,20,3,13];
+console.log(arr2);
+for(let j=0; j<arr2.length; j++){
+    let arr2max=(-Infinity); //아 어떤 작은 변수 하나를 선언하고 배열의 녀석들과 계속 비교하면서 큰놈을 맥스주면.. 맥스겟!
+       for(let i=j; i<arr2.length; i++){
+        //    console.log(`i : ${i} / j: ${j}`);
+           if(arr2max<arr2[i]){
+               arr2max=arr2[i];
+            // let indexMax=i 로 놓으면 if구문의 조건문을 최종 통과하는 i는 어차피 max값을 결정지은 최대값의 index일테니
+            // 최대값의 index를 변수 indexMax로 간단히 담아 갈 수도 있겠구나 이게 더 간단하겠네!!!!!!!!!!!!!!!!!!!!!!!!!!
+            } 
+            // console.log(`arr2max<arr2[i] : ${arr2max<arr2[i]} /  arr2max: ${arr2max}` );
+            // 이렇게 찍어보는 것 매우 중요했다... .이번과제에서 콘솔의 중요성 매우 잘 느낄 수 있었음..
+    }
+    let temp2=arr2[j];
+    // console.log(arr2max);
+    // console.log(arr2.indexOf(arr2max));   //최고값인 배열값의 인덱스를 겟!!!
+
+    let index2=arr2.indexOf(arr2max); //이런식으로도 변수를 잡고 인덱스 겟!!!!!!!!!!!!
+    
+    arr2[index2]=temp2
+    arr2[j]=arr2max;
+    console.log(arr2);
+
+    // 이건 왜 안되지???????
+    // 아 !!~!!~!!~!!~!!~!!~!!~!!~!!~ 
+    // 위에 let arr2max=(-Infinity);을 for구문 위에 놓으니 맥스값이 초기화가 되지 않아서 맥스를 계속 20으로 얻고있었던 것
+    // for(let k=0; k<arr2.length; k++){
+    //     if(arr2[k]==arr2max){
+    //         arr2[k]=temp1;
+    //         break;
+    //     }
+    // }
+    // arr2[j]=arr2max;
+    // console.log(j+":"+arr2); 아마 이렇게 하는것도 될듯
+}
+
+</script>
+
+
+<!-- 나무 그리기?? -->
+
+
+
+
+
+        </li>
+    </ul>
+    </article>
+    <article>
+        <h2>for in 반복문</h2>
+        <p>for(key in iterationObject){} : key를 가진 객체가 key를 반환할 수 없을 때까지 반복실행</p>
+        <p>JSON{key:value, key:value} => key를 반환   Vs   Array[a, b, c] => index를 반환</p>
+        <ul>
+            <li>[a,b,c] : 
+<script>
+    let arr11=["a","b","c"];
+    for(key in arr11){
+        document.write(`key : ${key} , `)
+    }
+</script>
+            </li>
+            <br>
+            <br>
+            <li>name:"최경민", age=36, email="artistckm86@gmail.com"
+<script>
+    let g1={name:"최경민", age:36, email:"artistckm86@gmail.com"} // = 이 아니라 :
+    for(let key in g1){
+        document.write(`key : ${key}, value : ${g1[key]}, `); //아 key가 정확히 index의 역할을 대신하는게 보이네
+    }
+</script>
+            </li>
+            <br>
+            <br>
+            <li>
+<script>
+    let s1="abcdefg";
+    for(let key in s1){
+        document.write(`key : ${key} / value : ${g1[key]}, `)
+    }
+</script>
+            </li>
+        </ul>
+    </article>
+    <article>
+        <h2>for of 반복문</h2>
+        <p>for(object of iterationObject(반복가능한 객체, 이를테면 배열 같은것))){}</p>
+        <p>반복가능한 데이터 타입의 객체에서 더이상 내용물이 나오지 않을 때까지 반복실행</p>
+        <p>(iterationObject).next() : (이 이하 내용 좀 어렵게 적어주셨는데...?)
+            next()는 포인트가 객체 밖에 있다가 내용물이 있으면 true를 반환하고
+            내용물로 포인트를 옮긴다. 그리고 내용물도 반환한다.
+            만약 값이 더이상 나오지 않으면 false를 반환한다.
+        </p>
+        <p>key값을 알아내기 힘들다./</p>
+        <li>["a","b","c"] :
+<script>for(xxx of arr11){document.write(xxx+",")}</script>
+        </li>
+        <li>{name:"최경민", age:36, email:"artistckm86@gmail.com"}과 같은 json은 iteration object가 아니어서 안된다고 함.
+            근데 위에서 썼잖아?? 위의 경우랑 뭔차이지..
+        </li>
+    </article>
+    <hr>
+    <article>
+    <h2>페이지 테마 변경시키기(background, color)</h2>
+    <p>JSON형식으로 테마객체를 만든후 select box를 이용하여 테마 변경</p>
+    <select id="themaSelectBox">
+        <option value="default">기본</option>
+        <option value="black">블랙</option>
+        <option value="darkgray">메탈</option>
+        <option value="pink">핑크</option>
+    </select>
+<script>
+const thema1 = {
+    default : ["white","black"],
+    black : ["black","white"],
+    darkgray : ["darkgray","bisque"],
+    pink : ["lavender","indigo"]
+}
+const themaSelectBox1 = document.getElementById("themaSelectBox");
+themaSelectBox1.addEventListener("change", (e) => {
+    document.body.style.backgroundColor = thema1[e.target.value][0];
+    document.body.style.color = thema1[e.target.value][1];
+    //event.target.C : Event에 접근하여 c를 불러온다..?
+    //특정 태그.addEventListener("A", 함수B)
+    //특정 태그에서 A가 발생하면 함수 B를 실행시킨다.
+});
+</script>
+    </article>
+    <hr>
+    <article>
+        <h2>마우스 커서를 올리면 숨겨진 요소 나오게하기</h2>
+        <p>
+            마우스 커서를 갖다대는 이벤트 : mouseEnter
+            <br>마우스 커서를 빼는 이벤트 : mouseLeave
+        </p>
+        <ui id="popNav">
+            <li>
+                html Study
+                <ul class="pop_nav" style="display: none;">
+                    <li><a href="">intro</a></li>
+                    <li><a href="">basic</a></li>
+                    <li><a href="">sttributes</a></li>
+                    <li><a href="">style</a></li>
+            </ul>
+            </li>
+            <li>
+                js Study
+                <ul class="pop_nav" display="none;">
+                    <li><a href="">intro</a></li>
+                    <li><a href="">variable</a></li>
+                    <li><a href="">data type</a></li>
+                    <li><a href="">number</a></li>
+                </ul>
+            </li>
+        </ui>
+<script>
+    const popNav1 = document.getElementById('popNav');
+    
+  
+    popNav1.addEventListener('mouseenter', (e) => {
+        const pop_nav2 = e.target.getElementsByClassName("pop_nav");
+        for(let elem1 of pop_nav2){
+            elem1.style.display="block";
+        }
+    });
+    popNav1.addEventListener('mouseleave', (e) => {
+        const pop_nav2 = e.target.getElementsByClassName("pop_nav");
+        for(let elem1 of pop_nav2){
+            elem1.style.display="none";
+        }
+    });
+</script>
+    </article>
+</body>
+</html>

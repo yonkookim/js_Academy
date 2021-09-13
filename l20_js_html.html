@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js html</title>
+</head>
+<body>
+    <main>
+        <h1>자바스크립트로 html문서 조작하기</h1>
+        <p>document.innerHTML은 문자열로서 내부에 태그를 추가하거나 삭제하기 힘들다.</p>
+        <article>
+            <h2>document.element.append() 
+                
+<script> 
+//노드는 요소 객체 자체를 의미한다. 
+//노드는 태그가 아니다. html 문서를 해석해서 html요소를 객체로 만들어 배치하면
+//배치된 배치표를 DOMTREE라 하고 트리안의 요소를 노드라한다. 스크립트 안의 문자열이 요소가 아니고
+//웹브라우저에서 구현된 하나(태그의 구현) 하나를 노드라 한다.
+    let node_list1=document.createElement('li') //node_list1가 참조(호출)하는 노드객체는 1개뿐이다.
+    //이때 이 생성된 노드는 어디에도 속하지 않는 객체인데 이를 어딘가에 속하게 하는 코드가 element.append(node_list1)인것
+    node_list1.append("노드의 뒤에 추가된 내용1"); // 2_ 추가된 리스트(노드)의 텍스트에 '문자열 내용'을 추가
+    node_list1.innerText="노드의 앞에 추가된 내용2"; //이렇게도 추가할 수 있다. 아 이렇게 추가하니 앞선 텍스트는 다 지워지네 그러면 지워지지 않고 텍스트를 추가할 수 있는 아래열의 코드가 의미가 있네
+    // node_list1.prepend("노드의 앞에 추가된 내용2"); 
+
+    let node_list2=document.createElement('li') //node_list2는 또 다른 노드객체 1개를 호출한다.
+    node_list2.append("노드의 뒤에 추가된 내용111"); //
+    node_list2.prepend("노드의 앞에 추가된 내용222"); 
+
+
+</script>
+                <button type="button" onclick="
+                    // document.getElementById('appendTest').append('문자열 넣을 수도 있고'); 
+                    document.getElementById('appendTest').append(node_list1); // 1_ 리스트를 추가했고 
+                    ">append()</button></h2>
+                    <p>element의 자식 요소중 가장 뒤에 문자열 or html노드를 위치시킨다. </p>
+                    <p>html노드 : 요소객체 자체를 의미</p>
+                    <p>document.createElement()가 html노드를 생성한다.</p>
+                    <p>node에 대하여.. node1.append("쏼라") : 노드 요소안의 내용에 쏼라 가 추가된다.</p>
+                    <p>이렇게 생성된 node는 어디에도 속하지 않는 기본단위의 요소(객체)이다. 즉 어디에도 위치할 수 있는..</p>
+                    <p>생성된 노드를  특정element.append(node1); 로 특정element위치에 위치하도록 정할 수 있다.</p>
+            <ul id="appendTest">
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+            </ul>
+        </article>
+        <article>
+            <h2>document.element.prepend() 
+                <button type="button" onclick="
+                    document.getElementById('prependTest').prepend(node_list2); //새로 추가되지 않고 기존의 추가됐던 노드1개가 계속움직이네
+                    ">prepend()</button></h2>
+                    <p>append()와 기본적으로 동일하게 동작하지만 element의 자식요소 중 가장 앞에 위치시킨다.</p>
+            <ul id="prependTest">
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+            </ul>
+        </article>
+<script>
+    let h3_node=document.createElement("h3");
+    console.log(h3_node);
+    h3_node.innerText="에프터 추가내용"; //<<------------ 이렇게 노드의 텍스트 내용을 추가하는게 더 쉽네
+</script>
+        <article>
+            <h2>document.element.after()
+                <button type="button" onclick="
+                    document.getElementById('afterTest').after(node_list1); //append와는 다르게 형제요소 위치에 추가
+                    //이렇게 after로 호출하게되면 prepend로 호출했던 노드는 사라지고 여기로 옮겨온다 왜????
+                    //append, prepend, after, before 모두 생성된 노드 node_list1 이놈을 어디다 둘지의 실행함수들인 것이니까
+                    ">after()</button></h2>
+                    <p>append()와 기본적으로 비슷하게 동작하지만 element의 바로 앞에 형제요소로서 위치시킨다.</p>
+            <ul id="afterTest">
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+
+
+            </ul>
+        </article>
+        <article>
+            <h2>document.element.before()
+                <button type="button" onclick="
+                    document.getElementById('beforeTest').before(node_list1);//prepend와는 다르게 형제요소 위.치에 추가
+                    ">before()</button></h2>
+                    <p>append()와 기본적으로 비슷하게 동작하지만 element의 바로 뒤에 형제요소로서 위치시킨다.</p>
+            <ul id="beforeTest">
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+            </ul>
+        </article>
+
+        <article>
+            <h2>0과 1사이에 li노드를 추가하세요.</h2>
+            <button type="button" onclick="
+            let node_list2= document.createElement('li');
+            document.querySelector('#test li:nth-child(2)').before(node_list2); //이거 셀렉트 안의 문법 주의~!!!!!!!!!!!!!!!!!
+            ">0 뒤에 추가</button> 
+            <!-- 아니 이경우는 왜 계속 만들어져?? onclick시 계속해서 함수가 실행되고 있는 것인데
+            함수 안에서 선언한 변수는 박스scope 이기 떄문에 충돌없이 계속해서 노드가 만들어지는 상황. -->
+
+            <ul id="test">
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+            </ul>
+        </article>
+
+
+
+        <article>
+            <h2>0과 1사이에 li노드를 추가하세요. ver.2 & 2번째에 글씨 입력 <input type="text" onchange="answer0(event)"></h2>
+            <!-- onchange는 내가 정한 대입값이 아닌 event라는 객체가 생성된다 -->
+
+            <button type="button" onclick="
+            // document.querySelector('#test2 li:nth-child(2)').before(node_list3); <-- 이렇게도 되고
+            document.getElementById('test2').getElementsByTagName('li')[1].before(node_list3); //이렇게도 되고
+            ">0 뒤에 추가</button> 
+            <!-- 아니 이경우는 왜 계속 만들어져?? onclick시 계속해서 함수가 실행되고 있는 것인데
+            함수 안에서 선언한 변수는 박스scope 이기 떄문에 충돌없이 계속해서 노드가 만들어지는 상황. -->
+            
+    
+            <ul id="test2">
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+            </ul>
+
+<script>
+
+    
+    function answer0(xxxxx){
+        let li_node=document.createElement("li");
+        li_node.style.color="red";
+        li_node.innerHTML="<b>"+xxxxx.target.value+"</b>";
+        document.querySelectorAll("ul#test2>li")[0].after(li_node); //하.. 문법주의 이렇게도 찾을 수 있네 ~?????????????!!!!!!!!!!!
+    }
+
+
+
+    let node_list3= document.createElement('li');
+    node_list3.innerText="0.5";
+    let list0=document.getElementById("test2").getElementsByTagName("li")[0]; //아 이게 계속 오류났던게 리스트가 밑에있어서 못읽은.. 위에 올리니 되네 순차적.. 주의
+    console.log(list0);
+    document.querySelector('#test2 li:nth-child(3)').after(list0);
+</script>
+            
+
+            
+        </article>
+
+
+        <article>
+            <h2>내가 원하는 위치에 내용을 추가하기(규칙: 1.내용/내용:마지막) 
+                <p>
+                    <input type="text" onchange="answer0(event)" placeholder="0~.내용"></h2>
+            <!-- onchange는 내가 정한 대입값이 아닌 event라는 객체가 생성된다 -->
+                </p>
+                <p> 삭제할 줄 번호 입력
+                    <input type="number" placeholder="0~삭제" value="" onblur="answer1(event)">   
+                    <button value="삭제" onclick="">삭제</button>
+                </p>
+
+            <ul id="test3"> test3
+                <li>0 <button onclick="this.parentNode.remove()">X</button></li>
+                <li>1 <button onclick="this.parentNode.remove()">X</button></li>
+                <li>2 <button onclick="this.parentNode.remove()">X</button></li>
+            </ul>
+
+
+<script>
+    //onfucus : 입력요소에 마우스 포인트로 찍었을 때
+    //onblur : 입력요소에서 빠져나왔을 때
+    function answer1(e){
+        //과제!!! 
+        // 1. 오류 해결
+        // 2. 버튼을 만들어서 삭제
+        //미완
+        console.log(e.target.value);
+        document.querySelector(`ul#test3>li:nth-child(${Number(e.target.value)})`).remove(); //value는 string이므로 넘버로!
+    }
+       
+        
+    function answer0(e){
+        let listLength=document.getElementById("test3").getElementsByTagName("li").length;
+
+        let inputVal=e.target.value; //this.value와 동일
+        let inputValArr=inputVal.split(".");
+        console.log(inputValArr);
+        let li_node=document.createElement("li");
+        li_node.style.color="red";
+        let test3List=document.querySelectorAll("#test3>li");
+        console.log(test3List);
+
+
+
+
+        if(test3List.length==0){
+        // li_node.innerHTML="<b>"+inputValArr[0]+"</b><button onclick='this.parentNode.remove()'>X</button>"; //왜있었지?
+        document.querySelector("#test3").innerHTML="<li><b style='color:red'>"+inputValArr[1]+"</b><button onclick='this.parentNode.remove()'>X</button></li>";
+        }
+
+
+        else if(inputValArr.length==1){
+        li_node.innerHTML="<b>"+inputValArr[0]+"</b><button onclick='this.parentNode.remove()'>X</button>";  //태그가 적용되게 넣을 수도 있구나
+        test3List[listLength-1].after(li_node);
+        }
+
+        
+        else if(inputValArr[0]<0){
+            li_node.innerHTML="<b>"+inputValArr[1]+"</b><button onclick='this.parentNode.remove()'>X</button>";
+        test3List[listLength-1].after(li_node);
+        }
+
+
+        else if(inputValArr[0]<=listLength){
+        li_node.innerHTML="<b>"+inputValArr[1]+"</b><button onclick='this.parentNode.remove()'>X</button>";
+        test3List[inputValArr[0]-1].before(li_node);
+        }
+
+
+        else{
+        li_node.innerHTML="<b>"+inputValArr[1]+"</b><button onclick='this.parentNode.remove()'>X</button>";
+        test3List[listLength-1].after(li_node);
+        }
+        // 길이보다 긴 값이 왔을 때 마지막에 보내기
+        // .없이 문자만 왔을 때 마지막에 보내기
+    }
+   
+</script>
+
+           
+        </article>
+
+
+
+
+===========================================선생님 버젼 못따라감 ================================================
+
+        <!-- <article>
+            <h2>내가 원하는 위치에 내용을 추가하기(규칙: 1.내용/내용:마지막) T <input type="text" onchange="answer0(event)" placeholder="0~.내용"></h2>
+            onchange는 내가 정한 대입값이 아닌 event라는 객체가 생성된다 -->
+<!-- <script>
+    
+    function answer0(e){
+        let inputVal=e.target.value; //this.value와 동일
+        let inputValArr=inputVal.split(".");
+        let testLiArr=document.querySelectorAll("ul#test>li");
+        // console.log(inputValArr);
+        let li_node=document.createElement("li");
+
+        li_node.style.color="red";
+
+        if(inputValArr.length==2){
+            li_node.innerHTML="<b>"+inputValArr[1]+"</b>";
+
+        if(testLiArr.length>=inputValArr[0]){
+            document.querySelectorAll("ul#test4>li")[inputValArr[0]-1].before(li_node); 
+        }
+
+        li_node.innerHTML="<b>"+inputValArr[1]+"</b>";
+        document.querySelectorAll("ul#test4>li")[inputValArr[0]-1].before(li_node); //이땐 리스트가 밑에 있어도 작동해 왜?? 함수의 실행은 html을 모두 읽고난 후 실행되거든
+        }
+
+
+        else if(inputValArr.length==1){
+        li_node.innerHTML="<b>"+inputValArr[0]+"</b>";
+        document.querySelectorAll("ul#test4").append(li_node);
+        }
+        else{
+            alert("형식을 맞추세요*(0~.내용)");
+            e.target.value="";
+        }
+        
+    }
+    
+        // 길이보다 긴 값이 왔을 때 마지막에 보내기
+        //길이 지정 없이 왔을 때 마지막에 보내기
+   
+   
+</script>
+             -->
+    
+            <!-- <ul id="test4"> test4
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+            </ul>
+        </article> -->
+
+
+    </main>
+</body>
+</html>

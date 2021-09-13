@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>js function</title>
+</head>
+
+<body>
+    <h1>자바스크립트의 함수</h1>
+    <p>함수는 프로그래밍 언어에서 가장 중요한 실행을 담당한다.
+        함수는 실행의 그룹화된 가장 작은 단위로 보통은 사용되나 함수지향 언어인 자바스크립트에서는
+        클래스처럼 사용되기도 한다.
+    </p>
+    <p>자바스크립트의 (선언실행?)실행은 순서를 따르지만 선언된 것을 참조할 때는 어디에서도 가능하다.</p>
+    <p>기본 선언법 : function name(parameter){ return a; }</p>
+    <p>함수 표현식(변수에 익명함수를 선언) : const name= function(parameter){ return a; }
+        <br> const or let 으로 선언한 함수는 변수에 함수를 참조한 것이고 일정시간 사용하지 않으면 데이터가 사라진다. (메모리관리)
+        <br> 반면 기본선언법으로 함수를 선언하면 함수는 내장객체처럼되어 불변이고 언제든 어디서든 사용가능하다.
+        <br> 이런 차이로 기본선언된 함수는 코드 마지막에 선언하고도 맨 위에 코드에서도 참조(사용) 가능한 반면
+        <br> 함수표현식의 함수는 그 코드보다 상대적으로 위에서는 참조(사용)할 수 X, 이후에나 사용 가능
+        <br> 둘다 오버로딩이 되지 않기 때문에 같은이름으로 여러 함수를 정의했다면 마지막에 선언한 함수로 정의된다.
+    </p>
+    <p>익명함수란 : 인스턴스 즉 쓰고 사라질 함수로 보통은 매개변수로 쓰일 때 가볍게 선언하려 만들어진다.
+       <br>예) const a=function(){} : 근데 이건 익명함수를 활용하는 예이지만 변수가 함수의 이름이나 마찬가지. 
+       <br>예) document.onclick=function(){}  : 이때 onclick을 재정의한 익명함수는 해당 이벤트 발생시의 목적과 쓰임만 갖는다.
+    </p>
+    <p>es6에서 추가된 화살표함수 : const a= (parameter)=>{ return a; }
+        <br>예) document.element.onclick= ()=>{};
+        <br>예 document.element.addEventListener("onclick", function(){});
+        <br>예 document.element.addEventListener("onclick", ()=>{});
+        <br>예) window.setInterval(function(){},1000);
+        <br>예) window.setInterval(()=>{},1000);
+        <b id="increaseNum"></b>
+        <script>
+            let n=0;
+            window.setInterval(()=>{document.getElementById("increaseNum").innerText=++n;},1000)
+        </script>
+    </p>
+    <p> const a=function(...args){}; a(1,2,3,4,5,6,...) => [1,2,3,4,5,6,...] 
+        <br> ...args는 함수의 매개변수 개수를 제한하지 않는 배열타입의 매개변수이다.
+    </p>
+    <p> 자바스크립트는 함수를 객체로 인식한다. 인스턴스 객체로 생성하는 함수는 권장X
+        <script> 
+        document.write(`typeof (()=>{}) : ${typeof (()=>{})}`);
+        document.write(`<br>typeof function(){} : ${typeof (function(){})}`);
+        // document.write(`<br>typeof new function(){} : ${typeof (new function("a","b","return a+b"))}`);
+        </script>
+    </p>
+<script>
+    let a="실행1";
+    let b="실행2";
+    let c=a+b+"실행3";
+    //이때 세미콜론이 실행의 가장 작은 단위
+    function d1( ){
+    let a="실행1";
+    let b="실행2";
+    let c=a+b+"실행3";
+    console.log(c);
+    }
+    function d2(p1, p2){
+    let a=p1;
+    let b=p2;
+    let c=a+b+"실행3";
+    console.log(c);
+    }
+    //실행들의 묶음
+    d1(); //함수는 여러 실행을 한번에 묶어서 한다. 매개변수는 함수가 동적으로 작동하는것을 돕는다.
+    d2("안녕","하세요");
+    //함수의 선언을 다음과 같은 꼴로 보며  생각해보면.. let d=(){} , let d=( ,  , ){}  
+    // d라는 같은 이름의 여러 함수가 생성(오버로딩)되는 것이 아닌, 계속 다른 함수를 대입하여 마지막 대입된 함수만 생성된것
+    // 즉 같은 이름의 함수를 선언해버려서 앞선 함수가 사라지는 오류를 막기위해선 const로 함수를 선언하는 방법이 좋다.
+    
+    function d3(p1, p2="default"){
+    let a=p1;
+    let b=p2;
+    let c=a+b+"실행3";
+    console.log(c);
+    }
+    d3("test") //이 경우 매개변수 p2에 디폴트를 줘서 입력하지 않으면 자동으로 디폴트가 입력되는것을 확인할 수 있다.
+    
+    function r(a,b,c){
+        let sum = a+b+c;
+        return sum;  //return이 실행되면 함수는 종료된다. 즉 그 이하의 실행구문은 실행되지 않는다.
+    }
+    let sum1=r(1,2,3);
+    console.log(sum1);
+    console.log(r(4,5,6));
+    
+
+
+    function sumTest(a, b, c, d){
+        return a+b+c+d;
+    }
+    console.log(`sumtest(1,2,3,4): ${sumTest(1,2,3,4)}`)
+    console.log(`sumtest(1,2,3,4): ${sumTest(1,2,3)}`)//d가 undefined라서 연산할 수 없는 것의 결과는 NaN
+
+
+
+    function sumTest2(a, b=0, c=0, d=0){
+        return a+b+c+d;
+    }
+    console.log(`sumtest2(1,2,3,4): ${sumTest2(1,2,3,4)}`)
+    console.log(`sumtest2(1,2,3,4): ${sumTest2(1,2,3)}`) //이건 돼 왜? d에 디폴트 주고 입력 안한거니까
+    console.log(`sumtest2(1,2,3,4): ${sumTest2(1,2)}`) 
+    console.log(`sumtest2(1,2,3,4): ${sumTest2(1)}`) 
+
+
+
+    function sumTest3(a, b, c, d){
+        
+        if(b==undefined){
+            return a;
+        }
+        if(c==undefined){
+            return a+b;
+        }
+
+        if(d==undefined){
+            return a+b+c;
+        }
+        return a+b+c+d;
+    }
+    console.log(`sumtest3(1,2,3,4): ${sumTest3(1,2,3,4)}`)
+    console.log(`sumtest3(1,2,3,4): ${sumTest3(1,2,3)}`)
+
+
+
+    function sumTest4(a, b, c, d){
+        let sum=a+b+c+d;
+
+        // boolean(undefined or 0 or NaN or null or " ") =>false
+        // ! : not => !true=false, !false=true
+
+        if(!b){
+            sum=a;
+        }
+        else if(!c){
+            sum=a+b;
+        }
+        else if(!d){
+            sum=a+b+c;
+        }else{
+            sum=a+b+c+d; //if 구문에 빠져서 정읙 바뀌던 sum이 다시 모두 아니라면 본래 정의대로 빠져나오게.. ㅇㅋ
+        }
+        return sum;
+    }
+    console.log(`sumtest4(1,2,3,4): ${sumTest4(1,2,3,4)}`)
+    console.log(`sumtest4(1,2,3,4): ${sumTest4(1,2,3)}`)
+    // 하.. 진짜 강의 -_-
+
+    function sumTest5(...params){
+        console.log(params); //[1,2,3,4,5,6]
+    }
+    sumTest5(1,2,3,4,5,6); //매개변수들을 배열로 묶어서 출력하네? ...의 기능!!!
+    sumTest5([1,2,3,4,5,6],[1,2,3,4,5,6],[1,2,3,4,5,6]);
+
+
+    //이거 중요~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    function sumTest6(...params){
+        let sum=0;
+        // console.log(params);
+        for (var xxx of params){
+            sum+=xxx; //그래 이렇게 하면 간단히 해결되네
+        }
+        console.log(sum);
+    }
+    sumTest6(1,2,3,4,5,6);
+    // sumTest6([1,2,3,4,5,6],[1,2,3,4,5,6],[1,2,3,4,5,6]); // 해줬다는데 뭔솔.. 이건 걍 주석
+</script>
+</body>
+</html>

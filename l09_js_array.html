@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <h1>자바스크립트의 배열</h1>
+    <p>여러 변수를 index로 참조하여 저장하는 데이터 타입(Iterator 클래스를 참조(상속)하고 있다.)</p>
+    <p>작성법1: const array=[item1, item2, ...]</p>
+    <!-- 기본 데이터타입 처럼 사용 가능 -->
+    <p>작성법2(권장X): const array=new Array(item1, item2, ...)</p>
+    <p>호출법 : array[index]</p>
+    <p>["a","b","c","d"].toString(): 
+        <script>
+            let alphabet=["a","b","c","d"];
+            document.write(alphabet);
+            // <=> document.write(alphabet.toString()); 
+            // 객체를 바로 호출하면 toString()이 생략된다.
+            </script>
+    </p>
+    <p>대입 : array[index]=value
+        예)alphabet[1]="B" : 
+        <script>
+            alphabet[1]="B";
+            document.write(alphabet);
+        </script>
+    </p>
+    <p>type of []:
+        <script>
+            document.write(typeof alphabet);
+        </script>
+    </p>
+    <p>Array.isArray([]):
+        <script>
+            document.write(Array.isArray(alphabet));
+        </script>
+        <!-- isNaN비슷한 놈이구만 -->
+    </p>
+    <p>Array[maxIndex+1]=value: 
+        <script>
+            alphabet[4]="e";
+            document.write(alphabet);
+        </script>
+    </p>
+    <!-- 자바스크립트는 그때 그때 배열을 바꾸고 추가할 수 있다. 늘리는건 권장하지 않는다? 왜?? -->
+
+
+<script>
+    console.log("문자열 생성")
+    console.log(new String("문자열 생성"));
+    console.log("문자열 생성"==new String("문자열 생성")); //true
+    console.log("문자열 생성"===new String("문자열 생성")); //false
+
+    const arrayTest=[1,2,3,4,"오",6.0,7.5];
+    const arrayTest2=new Array(1,2,3,4,"오",6.0,7.5);
+    const arrayTest3=[1,2,100,4,"오",6.0,7.5];
+    
+    // 다음과 같이 기존의 기본 데이터에서 봤던 것들과 비교하면서 학습해보자
+    console.log(arrayTest);
+    console.log(arrayTest2);
+    console.log(arrayTest==arrayTest2); //false
+    console.log(arrayTest==arrayTest3); // false, 두 배열은 서로 다른 reference를 저장하기 때문에 서로 value값이 같을 수 X
+    console.log(arrayTest[0]==arrayTest2[0]); //false
+    console.log(arrayTest[0]===arrayTest2[0]); //false
+
+    // const arrayCompare=function(){} // <=>function arrayCompare(){}
+    // 매개 변수 두개가 서로 같은지 검사  멀? :길이, 각 index의 값이 같은지 검사
+    // 다른것이 나오면 break 걸어 반복문을 멈추고 false
+    // 전체 다 같으면 return true;
+    const arrayCompare=function(array1, array2){
+      if(array1.length==array2.length){
+       
+        for(let i in array1){
+        //    console.log(i+":"+array1[i]);
+        //    console.log(array1[i]==array2[i])
+           if (array1[i] != array2[i]) {
+               return false;}
+        //    else{return true;} 이렇게 하면 중간에 인덱스 0에서 참이면 끝나버려서 for문이 끝까지 돌지 않고 이상해져
+          } 
+
+        }else{
+           return false;
+       }
+
+       return true;  //if구문에서 길이가 같다면 참으로 시작, 그안의 for구문이 false를 뱉지 않고 무난히 다 돌고 나면 
+    //    최종적으로 return true를 뱉어내면서 끝나도록 함수 맨 끝에 return true!
+    //  이때 return은 함수의 for안에 있던 밖에 있던 함수를 종료시켜버리는 강력한 녀석 
+       
+    }
+    
+    console.log(arrayCompare(arrayTest,arrayTest2));
+    console.log(arrayCompare(arrayTest,arrayTest3));
+
+    
+</script>
+
+
+
+
+
+
+<!-- 
+<script>
+  이건 쌤이 하던거 받아 적은건데 제대로 못받아 적어서 의미만 파악하기 위한 용으로 냅두자
+  
+    const arrayCompare2=function(array1, array2){
+      if(array1.length==array2.length){
+       
+        for(let i=0; i<array1.length; i++){
+    console.log(array1[i]+"/"+array2[i]+":"+(array1[i]!==array2[i]));
+           if (array1[i] != array2[i]){}
+               return false;}
+        //    else{return true;} 이렇게 하면 중간에 인덱스 0에서 참이면 끝나버려서 for문이 끝까지 돌지 않고 이상해져
+          } else{
+           return false;
+       }
+       return true;
+        }
+
+    //if구문에서 길이가 같다면 참으로 시작, 그안의 for구문이 false를 뱉지 않고 무난히 다 돌고 나면 
+    //    최종적으로 return true를 뱉어내면서 끝나도록 함수 맨 끝에 return true!
+    //  이때 return은 함수의 for안에 있던 밖에 있던 함수를 종료시켜버리는 강력한 녀석 
+       
+    
+    
+    // console.log(arrayCompare2(arrayTest,arrayTest2));
+   
+
+    
+</script>
+ -->
+
+
+
+
+
+
+
+</body>
+</html>

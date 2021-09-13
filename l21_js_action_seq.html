@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js action seq</title>
+
+    <!-- <script src="./script/l21_action_seq.js"></script>
+    html 노드를 화면에 출력하다가 script 참조가 다운로드 될 때까지 기다린다. 그후 나머지 다운 -->
+    
+    <!-- <script async src="./script/l21_action_seq.js"></script>
+    async : html노드를 출력하면서(parsing) 병렬적으로 참조문서를 다운하고 다운되는 즉시 실행한다./ (변수나 함수등이)선언된 스크립트 참조시 사용 -->
+
+    <script defer src="./script/l21_action_seq.js"></script>
+    <!-- defer : html노드를 모두 출력하고 html출력중에 미리` 다운된 참조된 문서를 실행(대부분 이거쓴다.) -->
+<body>
+    <script>
+        window.onload=function(){
+            document.getElementById("headTitle").style.textDecoration="wavy underline red";
+        }
+            // document.getElementById("headTitle").onload=function(){}
+        // document.getElementById("headTitle").style.color="red";
+        //headTitle의 노드가 아직 생성되지 않은 시점이기 때문에 적용되지 X (순차적 언어)
+        function colorChange(color1){
+            document.getElementById("headTitle").style.color=color1;
+        }
+    </script>
+    <h1 id="headTitle">자바스크립트 동작 순서</h1>
+    <ul id="eventTest">
+        <li>list에 마우스를 올리면 색깔이 바뀐다.</li>
+        <li>ul > li 노드에 mouseenter를 제정의 한다.</li>
+    </ul>
+
+    <article>
+        <h2>HTML문서에 선언된 스크립트의 동작 메커니즘</h2>
+        <ol>
+            <li>
+                브라우저는 html문서를 css와 병합해 DomTree구조를 생성한다.
+            </li>
+            <li>
+                브라우저가 병합된 구조를 보고 화면에 그래픽으로 순서에 맞게 개체를 표현(출력)한다.
+            </li>
+            <li>
+                개체를 출력하던 중 자바스크립트 구문을 발견하면 역시 순차적으로 자바스크립트를 실행한다.
+            </li>
+            <li>
+                이때 자바스크립트가 노드 개체를 검색할떈 먼저 브라우저에 해당 노드 개체가 출력되어 있어야 찾을 수 있다.
+            </li>
+        </ol>
+    </article>
+    <article>
+        <h2 id="secondTitle">순차적 언어인 html과 스크립트가 문제를 일으키지 않게 하는 방법</h2>
+        <ul>
+            <li>자바스크립트를 모든 노드가 생성된 시점인 body아래에 작성한다.(링크를 한다.)</li>
+            <li>onload : 해당하는 노드가 생성되었는지 확인 / window.onload=function(){스크립트 작성}</li>
+            <li>window 객체가 완전히 생성된 시점 즉, 노드가 모두 로드된 시점에 자바스크립트를 작성</li>
+            <li>script src="참조" 이때 defer를 지정하면 html 문서를 다 다운받고 로드한 시점에 참조된 script문서를 실행</li>
+        </ul>
+    </article>
+    <script>
+        document.getElementById("headTitle").style.backgroundColor="yellow";
+        //headTitle의 노드가 생성된 이후의 시점이기 때문에 적용 O (순차적 언어)
+        colorChange("blue");
+
+        
+
+        
+        document.querySelectorAll("ul#eventTest>li").forEach((v)=>{
+            console.log(v);
+            v.addEventListener("mouseenter",()=>{      // 이벤트 리스너의 활용!!!!!!!!!!!!!!!!!!!
+                console.log("dddd");
+                event.target.style.color="green";
+            })
+        });
+       
+
+        let li_node=document.createElement("li");
+        li_node.innerText="추가된 리스트";
+        //li_node를 추가하기 전에 기존의 li에 이벤트를 정의한것이기 때문에 li_node에는 이벤트가 적용이 되지 않는다.
+        //이를 해결하기 위해선 만들 때 마다 이벤트를 재정의하도록
+         // 이벤트 재정의 : 각 노드에 있는 이벤트 속성(함수)을 새롭게 작성하는 것
+         li_node.onmouseenter=function(){this.style.color="pink";}   //이런식으로 온클릭이나 마우스오버를 정의할 수 도 있구나 !!!!!!!!!!!!!!!!!!!!!!!!!
+        document.querySelector("ul#eventTest").append(li_node);
+    </script>
+</body>
+<!-- 모든 이벤트는 html을 모두 띄운 후 작동 되어야 오류를 제거할 수 있다. -->
+</html>

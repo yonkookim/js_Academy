@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+
+    <h3>쌤거 그대로 갖고온거
+    </h3>
+
+
+
+    <ul>
+        <li>
+            태어난 해: 현재 해 - 나이 + 1
+            <input type="text" name="age" value="" placeholder="나이를 입력하세요."
+            onchange="birthdayAlert(event)" id="birthInput">
+            <!-- 이벤트를 입력하겠다는 것은 뭐지? 경고창을 event로 받겠다는건가 맞네
+            함수에 target없이도 결과는 똑같은데 보통 이렇게 하나보지..? 무슨차이??-->
+            <span id="ageTest" style="color:red"></span>
+<script>
+let ageTest=document.getElementById("ageTest")
+let birthInput=document.getElementById("birthInput")
+let that2= new Date().getFullYear();
+function birthdayAlert(xxxxx){
+    let that1= xxxxx.target.value;
+    if(Number.isNaN(that1*1)){
+        ageTest.innerText="문자열을 입력 할 수 없습니다.";
+        //that1=""; 입력요소에 입력되기 전의 value이기 때문에 변경해도 입력요소가 바뀌지는 않는다.
+        birthInput.value="";
+    } else if (that1*1>120 || that1*1<1){ //that1이 120보다 크거나 1보다 작을때 경고창 띄우고 싶어
+        ageTest.innerText="1부터 120까지의 수만 입력";
+    }
+    else{
+        ageTest.style.color="blue";
+        let year= new Date().getFullYear();
+        ageTest.innerText=(that2-that1*1+1)+"년도에 태어나셨네요~";
+
+    
+
+}
+}
+</script>
+        </li>
+
+        <li>
+        <input type="text" name="age" value="" placeholder="나이를 입력하세요."
+        onkeydown="onlyNum(event,this)">
+        <!-- 이벤트를 입력하겠다는 것은 뭐지? 경고창을 event로 받겠다는건가 맞네
+        함수에 target없이도 결과는 똑같은데 보통 이렇게 하나보지..? 무슨차이??-->
+        <span id="ageTest" style="color:red"></span>
+    </li>
+<script>
+    function onlyNum(e,thisElement){
+        let eVal=e.target.value; //이벤트가 발생하기 전 타겟 요소의  value를 반환
+        // console.log(e.keyCode); //누를 때마다 키코드가 뜨는 것이보인다. 속성keyCode를 제대로 봐보자 숫자는 48~57번
+        console.log(e.target.value);
+        if(e.keyCode>=48 && e.keyCode>=57){
+            console.log("숫자만 입력하셨습니다~");
+        }else{
+            thisElement.value=eVal;
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </ul>
+
+
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+#calendarTable {
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 100%;
+}
+#calendarTable th,
+td {
+  border: 1px solid black;
+}
+
+#calendarTable td.active {
+  color: rgb(250, 250, 250);
+  background-color: rgb(74, 74, 85);
+}
+
+#calendarTable td.disabled {
+  color: rgb(130, 150, 150);
+  background-color: rgb(
+    230,
+    230,
+    240
+  ) !important; /*강조를 주어서 우선 적용 되도록*/
+  box-shadow: 0 0;
+}
+
+#calendarTable td:hover {
+  background-color: rgb(28, 28, 31);
+  box-shadow: 3px 3px 10px black;
+}
+
+#calendarTable .schedule {
+  /* 이게 또 calendarTable 하고 .schedule을 붙여서 쓰면 안먹히고 띄워야 먹히네 흠..*/
+  visibility: hidden;
+  /* display: none = 사라지게 한다 =>속성변화 줄수 x , visibility: hidden = 존재하지만(공간은 차지하지만) 보이지만 않게한다. */
+}
+
+#calendarTable h5 {
+  text-align: center;
+  font-size: 15px;
+}
+#calendarTable th {
+  padding: 10px;
+  background-color: rgb(165, 184, 243);
+}
+/* disabled : 비활성화 된  */
+
+#calendarTable td.disabled .schedule {
+  visibility: hidden;
+}
+
+#calendarTable td:nth-child(7n) {
+  background-color: rgb(202, 128, 128);
+}
+
+#calendarTable td:nth-child(7n + 1) {
+  background-color: rgb(202, 128, 128);
+}
+
+/* .make, //how?? 클래스 이름 2개 한번에 선택  하우?? 그리고 박스 가운데 보내는거 어떻게 하더라,...
+.calendar {
+  display: flex;
+} */

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>js string.method()</title>
+</head>
+
+<body>
+    <h1>자바스크립트 문자열 string의 메소드 </h1>
+    <p>문자열은 유저에게 전달하는 데이터로 웹상에서 가장 많이 사용된다.
+        때문에 문자열을 다루는 함수가 많이 존재한다.
+    </p>
+    <!-- table>(thead>tr>th*3)+tbody>(tr>td*2+td{<script>document.write()</script>})*13 -->
+    <table>
+        <thead>
+            <tr>
+                <th>method</th>
+                <th>설명</th>
+                <th>예시</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>toUpperCase(), toLowerCase()</td>
+                <td>문자열의 대문자 or 소문자로 반환</td>
+                <td>
+                    "A b C d E".toUpperCase() :<script>document.write("A b C d E".toUpperCase())</script>
+                    <br>"A b C d E".toLowerCase() :<script>document.write("A b C d E".toLowerCase())</script>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>trim()</td>
+                <td>문자열의 앞뒤 공백을 제거한다.</td>
+                <td>
+                    "  최경민   ".trim().length : <script>document.write("  최경민   ".trim().length)</script>
+                </td>
+            </tr>
+            <tr>
+                <td>charAt(), charCodeAt()</td>
+                <td></td>
+                <td>
+                    "ABCDE".charCodeAt(0) :
+                    <script>document.write("ABCDE".charCodeAt(0))</script>
+                    <br> "ABCDE".charAt(0) :
+                    <script>document.write("ABCDE".charAt(0))</script>
+                    <br> "ABCDE"[0] :
+                    <script>document.write("ABCDE"[0])</script>
+                </td>
+            </tr>
+
+            <tr>
+                <td>sclice(start, end)</td>
+                <td>일부 문자를 추출할 때 사용한다.</td>
+                <td>
+    <script>
+        let food="스파게티 피자 된장찌개 샌드위치";
+    </script>
+                    "스파게티 피자 된장찌개 샌드위치".slice(8, 12) : <script>document.write("스파게티 피자 된장찌개 샌드위치".slice(8, 12));</script>
+                    <br> "스파게티 피자 된장찌개 샌드위치".slice(-9,-5) : <script>document.write("스파게티 피자 된장찌개 샌드위치".slice(-10,-5));</script>
+                    <br> "스파게티 피자 된장찌개 샌드위치".slice(5) : <script>document.write("스파게티 피자 된장찌개 샌드위치".slice(5));</script>
+                    <br> "스파게티 피자 된장찌개 샌드위치".slice(-5) : <script>document.write("스파게티 피자 된장찌개 샌드위치".slice(-5));</script>
+                    <br> "스파게티 피자 된장찌개 샌드위치".slice(13, 17) : <script>document.write("스파게티 피자 된장찌개 샌드위치".slice(13, 17));</script>
+                    <br> "스파게티 피자 된장찌개 샌드위치".slice(-4,) : <script>document.write("스파게티 피자 된장찌개 샌드위치".slice(-4,));</script>
+                    <br> "스파게티 피자 된장찌개 샌드위치".slice(-4,) : <script>document.write(food.slice(-4,));</script>
+            </tr>
+            <tr>
+                <td>substring(start,end)</td>
+                <td>slice와 동일하지만 양수 인텍스만 사용가능</td>
+                <td>
+                    "스파게티 피자 된장찌개 샌드위치".substring(5,7) :
+                    <script>document.write("스파게티 피자 된장찌개 샌드위치".substring(5,7));</script>
+                </td>
+            </tr>
+            <tr>
+                <td>substr(start,length</td>
+                <td>일부 문자를 추출한다. 이때 시작점부터 길이까지 추출한다.</td>
+                <td>
+                    "스파게티 피자 된장찌개 샌드위치".substr(8,2) :
+                    <script>document.write("스파게티 피자 된장찌개 샌드위치".substr(8,2));</script>
+                    <br> "스파게티 피자 된장찌개 샌드위치".substr(-9,2) :
+                    <script>document.write("스파게티 피자 된장찌개 샌드위치".substr(-9,2));</script>
+                    <br> "스파게티 피자 된장찌개 샌드위치".substr(-4,4) :
+                    <script>document.write("스파게티 피자 된장찌개 샌드위치".substr(-4,4));</script>
+                    <br> "스파게티 피자 된장찌개 샌드위치".substr(food.length-4, 4) :
+                    <script>document.write("스파게티 피자 된장찌개 샌드위치".substr(food.length-4, 4));</script>
+                </td>
+                </td>
+            </tr>
+            <tr>
+                
+                <td>startWith()</td>
+                <td>특정 문자열로 시작하는지 여부(boolean)</td>
+                <td>
+                    food.startsWith("스파"): <script>document.write(food.startsWith("스파"));</script>
+                    <br> food.startsWith("스파",0): <script>document.write(food.startsWith("스파",0));</script>
+                    <!-- 갑자기 0 기본값 무슨의미? 아 단어의 시작점의 인덱스.. 설명좀 하자-->
+                    <br> food.startsWith("된장",8): <script>document.write(food.startsWith("된장",8));</script>
+                </td>
+            </tr>
+            <tr>
+                <td>endsWith(String, position=String.length)</td>
+                <td>특정 문자열로 끝나는지 여부</td>
+                <td>
+                    food.endsWith("위치") :<script>document.write(food.endsWith("위치"));</script>
+                    food.endsWith("된장",10) :<script>document.write(food.endsWith("된장",10));</script>
+                </td>
+            </tr>
+            <tr>
+                <td>includes(String, start position)</td>
+                <td>어떤 위치부터 특정 문자열이 있는지 여부(boolean)</td>
+                <td>
+                    food.includes("찌개") :
+                    <script>document.write(food.includes("찌개"))</script> 
+                    <br> food.includes("찌개" 12) :
+                    <script>document.write(food.includes("찌개",12))</script>
+                </td>
+            </tr>
+            <tr>
+                <td>indexOf(string, start position)</td>
+                <td>특정 위치부터 특정 문자열이 있는지 검색후 찾으면 바로 stop 문자의 시작점index를 반환, 
+                    없으면 -1을 반환
+                </td>
+                <td>
+                    food.indexOf("피자") :
+                    <script>document.write(food.indexOf("피자",2))</script> 
+                    <br> food.indexOf("피자") :
+                    <script>document.write(food.indexOf("피자",6))</script>
+                    <br> food.indexOf("스파게티") :
+                    <script>document.write(food.indexOf("스파게티"))</script>  
+                </td>
+            </tr>
+            <tr>
+                <td>lastIndexOf(string, end position)</td>
+                <td>특정 위치부터 거꾸로 특정 문자열이 있는지 검색후 찾으면 바로 stop 문자의 시작점index를 반환, 
+                    없으면 -1을 반환
+                </td>
+                <td>
+                    <script>
+                        let food2="Brave new worldddd";
+                    </script>
+                    "Brave new world".lastIndexOf("w") :
+                    <script>document.write(food2.lastIndexOf("w"));</script> 
+                    <br> "Brave new world".lastIndexOf("r") :
+                    <script>document.write(food2.lastIndexOf("r"));</script> 
+                    <br> "Brave new world".indexOf("r") :
+                    <script>document.write(food2.indexOf("r")); //비교 </script> 
+                    <br> "Brave new world".lastIndexOf("new") :
+                    <script>document.write(food2.lastIndexOf("new",12));</script> 
+                </td>
+            </tr>
+            <tr>
+                <td>split(String, limit length)</td>
+                <td>특정 문자열을 배열로 만들 수 있다.(길이를 정할 수 있다.)</td>
+                <td>
+                    document.write(typeof food) :
+                    <script>
+                    console.log(food);
+                    console.log(food.split(" "));
+                    console.log(food.split(" ",2));
+                    console.log(food.split(" ").join(","));
+                    // split이후 문자열이 배열이 되었네?? 배열의 길이도 조절 가능 하구만, join은 함수라는데 뭘 한거지
+                    document.write(typeof food); 
+                    
+                    </script>
+                    <br> document.write(typeof food.split(" ")) :
+                    <script>
+                        document.write(typeof food.split(" "));
+                    </script>
+                    <br> food.split(" ",3) : 
+                    <script>
+                        document.write(food.split(" ",3));
+                    </script>
+                    <br> food.split(",") : 
+                    <script>
+                        document.write(food.split(","));
+                        console.log(food.split(",")); //배열안의 인덱스를 하나로 만드는 건가??
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <td>replace()</td>
+                <td>특정 문자열이나 정규식 패턴으로 검색후(??) 다른 문자열로 변환한 값을 반환(바꾸는 것이X)</td>
+                <td>
+                    food.replace("된장찌개","스테이크") :
+                    <script>
+                    document.write(food.replace("된장찌개","스테이크"));
+                    // <!-- 이처럼 바뀐 값을 반환하기는 하지만 문자열의 저장데이터 자체를 바꾸지는 X 따라서 콘솔 찍어보면.. -->
+                    console.log(food);</script>
+
+                    <br> food.replace("",",") :
+                    <script>
+                    document.write(food.replace("",",")); // 최초의 공백 하나를 ,로 바꾼다 했는데 이거 좀 이상하게 됐네
+                   </script>
+                    <br> food.replace("된장찌개","$& 제외 스테이크 추가") :
+                    <script>
+                    document.write(food.replace("된장찌개","$& 제외 스테이크 추가")); // 최초의 공백 하나를 ,로 바꾼다 했는데 이거 좀 이상하게 됐네
+                    </script>
+                    <!-- $이 찾은 것 &은 자기 자신?  -->
+                </td>
+                
+            </tr>
+            <tr>
+                <td>replaceAll()</td>
+                <td>특정 문자열이나 정규식 패턴으로 검색후(??) 모든 문자열을 다른 문자열로 
+                    변환한 값을 반환(바꾸는 것이X)</td>
+                <td>
+                    food.replaceAll("",",") : 
+                    <script>
+                        document.write(food.replaceAll(" ",","));
+                    </script>
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

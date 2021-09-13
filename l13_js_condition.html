@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+
+<article>
+    <h2>Switch 조건문</h2>
+        <pre>작성법
+            let 변수1=대입값;
+            switch(변수1){ 
+                case a:  <!-- 조건a에는 엄격히 같을 비교 === 외에 == or > ... 등은 쓸수 X--> 
+                --실행--
+                break;
+
+                case b: 
+                --실행--
+                break;
+
+                case c: 
+                --실행--
+                break;
+
+                default:
+                --실행--
+            }
+        </pre> 
+        <p>스위치 케이스는 엄격한 비교(===)을 사용하고 위에서 부터 일치하는 항목을 찾으면
+           <br> 스위치는 종료된다.(엄격한 동등비교 외의 조건은 X)
+        </p>
+        <p>if에서 else if문과 동일하게 작동하지만 조건문의 수행속도가 굉장히 빠르다.</p>
+        <p>시각적으로 조건을 파악하기 좋다.</p>
+        <p>
+            <label for="">
+                콘솔에 입력값이 출력
+            
+            <select name="" id="" onchange="switchTest2(this.value)">
+                <option value="0">입력값:0</option>
+                <option value="1">입력값:1</option>
+                <option value="2">입력값:2</option>
+                <option value="3">입력값:3</option>
+            </select>
+             </label>
+        </p>
+</article>
+<script>
+    let x=0;
+    switch(x){
+        case 0:
+            console.log("입력한 값은 0입니다.");
+            break;
+        case 1:
+            console.log("입력한 값은 1입니다.");
+            break;
+        case 2:
+            console.log("입력한 값은 2입니다.");
+            break;
+        default:
+    }
+</script>
+
+<script>
+function switchTest(x){
+switch(x){
+    case 0:
+        console.log("입력한 값은 0입니다.");
+        break;
+    case 1:
+        console.log("입력한 값은 1입니다.");
+        break;
+    case 2:
+        console.log("입력한 값은 2입니다.");
+        break;
+    default:
+}
+}
+console.time("switchTest time") //시간보는 법도 모르겠는데....??
+console.timeLog("switchTest time")
+switchTest(1);
+console.timeEnd("switchTest time")
+</script>
+
+<script>
+function ifTest(x){
+if(x===0){
+    console.log("입력한 값은 0입니다.");
+}else if(x===1){
+    console.log("입력한 값은 1입니다.");
+}else if(x===2){
+    console.log("입력한 값은 2입니다.");
+}else{}
+    
+}
+
+console.time("ifTest time")
+console.timeLog("ifTest time")
+ifTest(2);
+console.timeEnd("ifTest time")
+</script>
+
+<script>
+function switchTest2(x){
+    console.log(typeof x); // 언제나 value의 타입 = 문자열!!!! 확인? 역시 String!! 다음 switch조건문의 변수 x를 Number(x)로!!
+switch(Number(x)){
+    case 0:
+        console.log("입력한 값은 0입니다.");
+        break;
+    case 1:
+        console.log("입력한 값은 1입니다.");
+        break;
+    case 2:
+        console.log("입력한 값은 2입니다.");
+        break;
+    default:
+        console.log("잘못된 값을 입력했습니다.")
+}
+}
+</script>
+
+    <article>
+        <h2>삼향연산자</h2>
+        <p>활용법1. (condition)? true : false <=> if(condition){true}else{false}</p>
+        <p>활용법2. let variable = (condition)? trueObject : falseObject;</p>
+        <pre>활용법3.
+            (condition)? true 
+            : (condition2)? true 
+            : (condition3)? true 
+            : false(else)
+        </pre> <!--else if와 같네-->
+        <p>조건파악이 편하고 코드가 간결해 프로그래밍 속도를 올려준다.</p>
+    </article>
+<script>
+
+    // (1>0)?window.alert()
+    // (1>0)?this.alert()//스크립트 최상위의 this는 윈도우와 같다. 윈도우는 생략 가능
+    // (1<0)?alert("1>0") : alert("1<0");
+    (1>0)? alert("1>0") : alert("1<0");
+</script>
+    <ul>
+        <li>
+            <script>document.write(` (1>0)? 참이면.. "1>0" : 거짓이면.. "1<0" = ${(1>0)? "1>0" : "1<0"}`) ;</script>
+        </li>
+    </ul>
+
+</body>
+</html>

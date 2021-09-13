@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+   <style>
+       table,th,td{
+           padding: 10px;
+       }
+   </style>
+</head>
+
+<body>
+    
+<table>
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>valueOf()</td>
+        <script>
+            console.log(typeof 13); //: 기본 데이터 타입(가장 많이 쓰는 데이타를 모아놓은 집합 숫자형, 문자형, 블린 등등...)  number
+            console.log(typeof new Number(13)); // : 인스턴스객체(new로 호출하는 것들), typeof 는 모든 인스턴스 객체의 타입을 object로 인식한다.
+            console.log(typeof new Number(13).valueOf()); //인스턴스 객체number에서 기본데이터 타입이 숫자인 value를 반환
+            
+        </script>
+        <td>'인스턴스 객체 Number'에서 '기본 데이터 타입 Number'를 반환하는 함수
+            <br> ex) typeof 100 : <script>document.write(typeof 100)</script>
+            <br> ex) typeof new Number(100) : <script>document.write(typeof new Number(100))</script>
+            <br> typeof 는 기본데이터 타입 외에 대부분을 object로 검사한다. 이때 new Number()은 '수'이지만 기본데이터 타입이 아니다.
+            <br> object는모든 기본데이터타입의 부모이다 : 모든 class??는 자동으로 object 확장자를 가지며. object는 인스턴스 객체의 생성을 돕는다? 
+            <br> ex) 100==new Number(100) : <script>document.write(100==new Number(100));</script> 값(value)을 비교
+            <br> ex) 100===new Number(100) : <script>document.write(100===new Number(100));</script> 값과 type을 비교
+        </td>
+    </tr>
+    
+    <tr>
+        <td>Object.toString()</td>
+        <td>'Number 객체'가 가지는 숫자값을 문자열로 반환한다.(모든 객체는 toString()을 갖는다.)
+            <br>보통 객체의 설명을 출력하도록 재정의한다.
+            <br>new Number(100).toString() : <script>document.write(new Number(100).toString())</script>
+            <br>typeof (new Number(100).toString()) : <script>document.write(typeof (new Number(100).toString()))</script>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    
+
+</table>
+</body>
+</html>

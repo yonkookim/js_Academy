@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>자바스크립트로 html문서 조작</h1>
+    <ul id="testUl">
+        <li>1번 목록</li>
+    </ul>
+    <hr>
+    <ul>
+        <li>목록에 새로운 리스트 추가 : <button type="button" onclick="insertList()">innerHTML</button></li>
+<script>
+    function insertList(){
+        
+        console.log(document.getElementById("testUl").innerHTML="<li>*번 목록</li>"); //li의 innerText만 바꾸는게 아니라 태그를 싹..?
+        console.log(document.getElementById("testUl").innerHTML+="<li>2번 목록</li>"); //
+    }
+</script>
+        <li>*번 목록 앞에 0번 추가 : <button type="button" onclick="insertList2()">innerHTML</button></li>
+<script>
+    function insertList2(){
+        console.log(document.getElementById("testUl").innerHTML="<li>0번 목록</li>"+document.getElementById("testUl").innerHTML);
+    }
+</script>
+    </ul>
+    <hr>
+    <ul id="testUl2">
+        <li>0목록</li>
+        <li>1목록</li>
+        <li>2목록</li>
+    </ul>
+        <!-- 0.5목록 추가하려면 어떻게?? -->
+        <!-- 1.5목록 추가하려면 어떻게?? -->
+    <hr>
+    <ul>
+        <li>0과 1사이에 0.5목록 추가 : <button type="button" onclick="insertList3()">0.5목록 추가</button></li>
+<script>    
+    console.log(document.getElementById("testUl2").innerHTML.trim().split("\n").splice(1,0,));
+
+    function insertList3(){
+        let string_List=document.getElementById("testUl2").innerHTML;
+        console.log(string_List); // testul2 내의 리스트를 싹 스트링으로 받아오네..
+        let array_list=string_List.trim().split("\n"); //한줄 띄어쓰기를 기준으로 배열값을 쪼개어 갖겠다.
+        console.log(array_list); //받아온 리스트를 배열로 만들었네
+        array_list.splice(1,0,"<li>0.5번 목록</li>")
+        console.log(array_list);
+        console.log(array_list.join());
+        console.log(array_list.join("\n"));
+        document.getElementById("testUl2").innerHTML=array_list.join("\n");
+    }
+</script>
+
+
+        <li>1번 목록 삭제 : <button type="button" onclick="removeList()">1번 목록 삭제</button></li>
+<script>
+    function removeList(){
+        let string_List=document.getElementById("testUl2").innerHTML;
+        let array_list=string_List.trim().split("\n");
+        array_list.splice(1,1)
+        document.getElementById("testUl2").innerHTML=array_list.join("\n");
+    }
+</script>
+
+<br>
+<br>
+<br>
+<br>
+==================================================================================================
+innerText로 특정 태그의 자식요소 전체를 스트링으로 받아올 수 있다.
+받아온 스트링은 수정 보완하기 매우 수월하다 
+수정 보완된 스트링을 다시 태그? 노드? 로 돌리는 작업 또한 가능하다.
+대충... document.innerText("수정된 string") 뭐 이런식이라는데 나중에 또 배우겠지
+==================================================================================================
+    </ul>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>js logical operator</title>
+</head>
+    
+<body>
+    <main>
+        <h1>자바스크립트의 논리 연산자</h1>
+        <p>&&(and), ||(or), !(not)</p>
+        <article>
+            <h2>||(or) : 합집합(덧셈), 하나만 진실이어도 진실</h2>
+            <ul>
+                <!-- li{<script>document.write(` : ${}`)</script>}*4 이거 안먹히는데..?-->
+                <li>
+                    <script>document.write(` (true||true) : ${(true||true)}`)</script></li>
+                <li>
+                    <script>document.write(` (true||false): ${(true||false)}`)</script></li>
+                <li>
+                    <script>document.write(` (false||true): ${(false||true)}`)</script></li>
+                <li>
+                    <script>document.write(` (false||false): ${(false||false)}`)</script></li>
+            </ul>
+        </article>
+
+        <article>
+            <h2>&&(and) : 교집합(곱셈), 하나만 거짓이어도 거짓</h2>
+            <ul>
+                <li>
+                    <script>document.write(` (true&&true) : ${(true&&true)}`)</script></li>
+                <li>
+                    <script>document.write(` (true&&false): ${(true&&false)}`)</script></li>
+                <li>
+                    <script>document.write(` (false&&true): ${(false&&true)}`)</script></li>
+                <li>
+                    <script>document.write(` (false&&false): ${(false&&false)}`)</script></li>
+            </ul>
+        </article>
+
+        <article>
+            <h2>논리연산의 순서(우선순위)</h2>
+            <p>&&(곱셈) ||(덧셈) 수학연산과 동일하게 곱셈부터 한다 생각하면 돼! 그리고.. 그냥 논리적으로 당연</p>
+        </article>
+        <article>
+            <h2>논리연산문제</h2>
+            <ul>
+                <li>(NaN||2):
+                    <script>document.write(NaN||2);</script>
+                    <script>document.write(Boolean(NaN||2));</script>
+                </li>
+                <li>(NaN||2||null):
+                    <script>document.write(NaN||2||null);</script>
+                    <script>document.write(Boolean(NaN||2||null));</script>
+                </li>
+                <li>(NaN||2&&null):
+                    <script>document.write(NaN||2&&null);</script>
+                    <script>document.write(Boolean(NaN||2&&null));</script>
+                </li>
+                <li>(NaN&&null):
+                    <script>document.write(NaN&&null);</script>
+                    <script>document.write(Boolean(NaN&&null));</script>
+                </li>
+            </ul>
+        </article>
+        
+        <article>
+            <h2>!(not)</h2>
+            <ul>
+                <li><script>document.write(`!true : ${!true}`);</script></li>
+                <li><script>document.write(`!false : ${!false}`);</script></li>
+                <li><script>document.write(`!!false : ${!!false}`);</script></li>
+                <li><script>document.write(`Boolean(null) : ${Boolean(null)}`);</script></li>
+            </ul>
+        </article>
+        
+        <article>
+            <h2>if 조건문</h2>
+            <p>if(condition){} : 조건이 참이면 블럭을 실행한다.</p>
+            <p>if(condition){}else{} : 조건이 거짓이면 else블럭을 실행한다.</p>
+            <p>if(condition1){}else if(condition2){}else{} : 1번 조건 만족시 1번 블럭 실행
+                그렇지 않으면 2번 조건 실행, 모두 만족하지 않으면 else실행
+            </p>
+            <p><b id=ifTestMessage></b><===</p>
+            <br>
+            <br>
+            <br>
+        <li>
+            <input type="text" value="" onchange="ifTest1(this.value)" placeholder="10~20, 30~40">
+            <script>
+                let ifTestMessage = document.getElementById("ifTestMessage");
+                const ifTest1=function(x){
+                    if(x>=10 && x<=20 || x>=30 && x<=40){
+                        ifTestMessage.innerText=`${x}를 입력하셨습니다.`;
+                    }else {
+                        let msg=`${x} :`;
+                        if(x<10) msg+="보다 큰수를 입력하세요"; //한줄일때는 if구문을 이런식으로 써도 된다.
+                        if(x>40) msg+="보다 작은수를 입력하세요";
+                        if(x>20 && x<30) msg+="10~20 또는 30~40사이의 수를 입력하세요.";
+                    
+                    ifTestMessage.innerText= msg;
+                    }
+                }
+            </script>
+        </li>
+        
+        <br>
+        --발전--
+        <br>
+
+        <li>
+            <input type="text" value="" onchange="ifTest2(this.value)" placeholder="10~20, 30~40">
+            <script>
+                const ifTest2=function(x){
+                    let msg=`${x} `;
+                    if(x>=10 && x<=20 || x>=30 && x<=40){
+                        msg+="를 입력하셨습니다.";
+
+                        ifTestMessage.innerText= msg;
+                    }else {
+                    if(x<10) msg+="보다 큰수를 입력하세요"; //이거는 왜 x: 이 앞에 붙고 위에 옳은 수는 안붙지?????
+                    if(x>40) msg+="보다 작은수를 입력하세요"; //if를 이렇게 else블럭안에 연달아 써도 되네..?
+                    if(x>20 && x<30) msg+="를 입력하셨습니다. 10~20 또는 30~40사이의 수를 입력하세요.";
+                    
+                    ifTestMessage.innerText= msg;
+                    }
+                }
+            </script>
+        </li>
+
+        <br>
+        --발전--
+        <br>
+
+        <li>
+            <input type="text" value="" onchange="ifTest3(this.value)" placeholder="10~20, 30~40">
+            <script>
+                const ifTest3=function(x){
+                    let msg=`${x} `;
+                    if(x>=10 && x<=20 || x>=30 && x<=40){
+                        msg+="를 입력하셨습니다.";
+
+                        ifTestMessage.innerText= msg;
+                    }else if(x>20 && x<30){
+                        msg+="를 입력하셨습니다. 10~20 또는 30~40사이의 수를 입력하세요.";
+                        ifTestMessage.innerText= msg;
+                    }else if(x<10){
+                        msg+="보다 큰수를 입력하세요";
+                        ifTestMessage.innerText= msg;
+                    }
+                    else if(x>40){
+                        msg+="보다 작은수를 입력하세요";
+                        ifTestMessage.innerText= msg;
+                    }else{
+                        ifTestMessage.innerText= "수를 입력하세요.";
+                    }
+                    }
+                
+            </script>
+        </li>
+    </article>
+    
+    </main>
+</body>
+</html>
