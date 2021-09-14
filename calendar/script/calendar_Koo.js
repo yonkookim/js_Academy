@@ -64,17 +64,18 @@ function printCalendar(paraMonth,paraYear=(new Date().getYear()+1900)){
     // console.log(new Date().getMonth()+1);
     // console.log(new Date().getFullYear());
     // console.log(document.querySelector("#memo .title"));
-    document.querySelector("#memo .title").innerText=``
-    console.log(e.currentTarget.querySelector(".schedule").innerHTML);
-    document.querySelector("#memo .title").innerHTML=`
-    ${new Date().getFullYear()}년 ${new Date().getMonth()+1}월 ${e.currentTarget.querySelector(".day").innerText}일
-     ${e.currentTarget.querySelector(".schedule").innerHTML}`;
+    // document.querySelector("#memo .title").innerText=``
+    // console.log(e.currentTarget.querySelector(".schedule").innerHTML);
+    document.querySelector(".memo .title").innerHTML=`
+    [${new Date().getFullYear()}년 ${new Date().getMonth()+1}월 ${e.currentTarget.querySelector(".day").innerText}일]`;
+    document.querySelector(".memo .schedule").innerHTML=`${e.currentTarget.querySelector(".schedule").innerHTML}`;
   }
+
 
   //활성화된 해당 월 출력
   for(let i=firstDay,d=1; i<lastDay+firstDay; i++){
   /////////////////////해당일의 클릭 이벤트 정의(일정 리스트 등록)///////////////////
-  tdList[i].addEventListener("click",scheduleList);
+  tdList[i].addEventListener("click",scheduleList); //문법 ~!!!!!!!!!!ㅇㅋㅇㅋㅇㅇㅋ
   
 //////////////////////해당월의 day출력/////////////////////
     tdList[i].querySelector(".day").innerText=d;
@@ -88,6 +89,10 @@ function printCalendar(paraMonth,paraYear=(new Date().getYear()+1900)){
       console.log(d_09[d]);
       for(key in d_09[d]){
         li_html+=`<li>`;
+        li_html+="<b class='time'>";
+        li_html+=(Number.parseInt(key/60)+"").padStart(2,0); //padStart(2,0) : '문자열'에 2자리까지 0을 채워라!!
+        li_html+=":"+(key%60+"").padStart(2,0); 
+        li_html+="</b>";
         li_html+=`${ d_09[d][key]}`;
         li_html+=`</li>`;
         
@@ -96,6 +101,8 @@ function printCalendar(paraMonth,paraYear=(new Date().getYear()+1900)){
     tdList[i].querySelector(".schedule").innerHTML=li_html; 
     d++;
   }
+
+
 
   //비활성화된 전달의 출력
   for(let i=firstDay-1; i>=0; i--){

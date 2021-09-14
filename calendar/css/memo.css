@@ -10,6 +10,13 @@ text-overflow : ellipsis; (넘어간 text대신 ...으로 text를 대체한다.)
   background-color: rgba(200, 200, 100, 0.8);
   margin: auto;
 }
+
+#memo .schedule li {
+  margin: 10px auto;
+  width: 80%;
+  font-size: 15px;
+}
+
 .memo .title {
   text-align: center;
 }
@@ -24,9 +31,9 @@ text-overflow : ellipsis; (넘어간 text대신 ...으로 text를 대체한다.)
   width: 100px;
   white-space: nowrap; /*두줄을 한줄로 걍 쭉*/
   overflow: hidden; /*스크롤*/
-  text-overflow: ellipsis; /*넘어가는 텍스트 ...*/
+  text-overflow: ellipsis; /*넘어가는 텍스트 ...
 }
-.memo ul.schedule li:hover {
+*/ .memo ul.schedule li:hover {
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 .memo ul.schedule li .delete {
