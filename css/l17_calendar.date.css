@@ -26,10 +26,16 @@ td {
 #calendarTable td:hover {
   background-color: rgb(28, 28, 31);
   box-shadow: 3px 3px 10px black;
+}
 
 #calendarTable .schedule {
   /* 이게 또 calendarTable 하고 .schedule을 붙여서 쓰면 안먹히고 띄워야 먹히네 흠..*/
-  visibility: hidden;
+  /* visibility: hidden; */
+  font-size: 5px;
+  width: 60px;
+  height: 70px;
+  margin-left: 0px;
+  overflow: auto;
   /* display: none = 사라지게 한다 =>속성변화 줄수 x , visibility: hidden = 존재하지만(공간은 차지하지만) 보이지만 않게한다. */
 }
 
@@ -44,7 +50,7 @@ td {
 /* disabled : 비활성화 된  */
 
 #calendarTable td.disabled .schedule {
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 #calendarTable td:nth-child(7n) {

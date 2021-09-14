@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <link rel="stylesheet" href="./css/l17_calendar.date.css">
+    <!-- <link rel="stylesheet" href="./css/memo.css"> -->
+    <meta charset="utf-8">
+    <title>js calendar</title>
+</head>
+
+<body>
+    <article>
+        <h2>Date 클래스</h2>
+        <ul>
+            <li>new Date() :<script>document.write(new Date())</script></li> <!-- toString()이 생략되어 쓰인다고 했었다.-->
+            <li>Number(new Date()) :<script>document.write(Number(new Date()))</script></li>
+            <li>Number(new Date("1970-1-1")) :<script>document.write(Number(new Date("1970-01-01")))</script></li>
+            <li>(new Date(year, month(0~11), day(0~), date(1~), hours, min, s, ms)) :</li>
+            <li>new Date(2021,8) :<script>document.write(new Date(2021,8))</script></li>
+            <li>new Date().setFullYear(2021,8,1) :<script>document.write(new Date().setFullYear(2021,8,1))</script></li>
+            <li>new Date().setFullYear(2021,8,1) :<script>document.write(new Date((new Date().setFullYear(2021,8,1))))</script></li>
+            <br>
+            <br>
+            <li>new Date(날짜).day() : 0~6(일~토) 해당 날짜의 요일 index get</li>
+            <li>new Date(2021,8,1).getDay() :<script>document.write(new Date(2021,8,1).getDay())</script></li>
+            <br>
+            <br>
+            <li>new Date(날짜).date() : 1~(1~) 해당 날짜의 일 get
+                <br>이때 1의 전인 0은?? 이전달의 마지막일을 출력한다 즉 기술적으로 이전달의 총 일수를 구할 수 있다.
+            </li> 
+            <li>new Date(2021,8,1).getDate() : 9월의 1일 겟=<script>document.write(new Date(2021,8,1).getDate())</script></li>
+            <li>new Date(2021,9,0).getDate() : 9월의 총 일수 겟=<script>document.write(new Date(2021,9,0).getDate())</script></li>
+        </ul>
+    </article>
+    
+    <article>
+        <h2>Element.classList</h2>
+        <p>Element.classList : html의 배열타입으로 자바스크립트 배열과는 다른 함수를 제공한다.</p>
+        <p>요소는 복수의 클래스를 가질 수 있다.</p>
+        <p>classList로 요소의 클래스를 호출할 수 있다. Element.classList = [a, b, c] ()</p>
+        <p>스타일이 적용된 클래스를 추가, 삭제하기 위해 많이 사용된다.</p>
+        <ul>
+            <li>classList.add("추가할 클래스 이름") : array.push() 와 비슷한 함수로 클래스를 추가한다.</li>
+            <li>classList.remove("제거할 클래스 이름") : array.splice() 와 비슷한 함수로 클래스를 제거한다..</li>
+            <li>classList.toggle("추가or삭제할 클래스 이름") : 같은 이름의 클래스가 있으면 삭제 없으면 추가</li>
+        </ul>
+    </article>
+
+    <!-- table#calendarTable>thead>tr>th{일}+th{월}+th{화}+th{수}+th{목}+th{금}+th{토}^^tbody>tr*6>td*7>div.dayContainer>h5.day+ul.schedule>li*5
+    table#calendarTable>thead>tr>th{일}+th{월}+th{화}+th{수}+th{목}+th{금}+th{토}^^tbody>(tr>(td>(div.dayContainer>h5.day+ul.schedule>li*5))*7)*6 -->
+    
+    
+    <h1>달력 만들기 & 일정 등록</h1>
+    <h2 class="make calendar">
+        <button type="button" onclick="change1()" id="preMove">2021년 8월</button>
+        <span id="toDay">2021년 9월</span>
+        <form name="changeDate">
+            <label>year:      
+                <input type="number" name="inputYear" value="2030" >
+            </label> 
+            <label>month:
+                <!-- <input type="number" name="" value="10" max="12" min="1"> -->  
+                <select name="selectMonth" onchange="funcSelect(this)">
+                    <!-- option[value="$"]{$월}*12 !!!!!!!!!! -->
+                    <option value="1">1월</option>
+                    <option value="2">2월</option>
+                    <option value="3">3월</option>
+                    <option value="4">4월</option>
+                    <option value="5">5월</option>
+                    <option value="6">6월</option>
+                    <option value="7">7월</option>
+                    <option value="8">8월</option>
+                    <option value="9">9월</option>
+                    <option value="10">10월</option>
+                    <option value="11">11월</option>
+                    <option value="12">12월</option>
+                </select>
+            </label>
+        </form>
+        <button type="button" onclick="change2()" id="nextMove">2021년 10월</button>
+    </h2>
+
+    <table id="calendarTable">
+        <thead>
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div class="dayContainer">
+                        <h5 class="day"></h5>
+                        <ul class="schedule">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</body>
+
+
+
+<script>
+
+let inputVal=document.forms.changeDate.inputYear.value;
+console.log(inputVal);
+
+function funcSelect(xxx){
+    let selectVal= xxx.options.selectedIndex;
+    console.log(selectVal);
+    nowMonth=selectVal+1
+    nowYear=inputVal
+    basicPrint(nowMonth,nowYear);
+    goToday.innerText=`${nowYear}.${nowMonth}`;
+    goPreMove.innerText=`${nowYear}.${nowMonth-1}`;
+    goNextMove.innerText=`${nowYear}.${nowMonth+1}`;
+}
+
+
+
+
+
+
+//=================================================================================
+
+
+    const tdList=document.querySelectorAll("#calendarTable td");
+    console.log(tdList);
+
+
+    // for(x of tdList){
+    //     x.onmouseenter=(event)=>{
+    //         event.target.querySelector(".schedule").style.visibility="visible";
+    //     }
+    
+    //     x.addEventListener("mouseleave",function(event){
+    //         event.target.querySelector(".schedule").style.visibility="hidden";
+    //     })
+    // }
+
+
+
+//함수를 만들고 함수의 매개변수에 현재의 시간을 대입하고
+// 대입된 현재의 시간이 적용되도록..
+let nowMonth=new Date().getMonth()+1;
+let nowYear=new Date().getFullYear();
+
+let goToday=document.getElementById("toDay");
+let goPreMove=document.getElementById("preMove");
+let goNextMove=document.getElementById("nextMove");
+
+
+
+goToday.innerText=`${nowYear}.${nowMonth}`;
+goPreMove.innerText=`${nowYear}.${nowMonth-1}`;
+goNextMove.innerText=`${nowYear}.${nowMonth+1}`;
+
+
+// pre next 두 버튼을 한 클래스로 묶어두면 함수 2개를 1개로 합쳐서 진행할 수 있는가? pre와 next안의 변수들이 구분되지 않아서 쉽지 않을듯..?
+
+function change1(){
+    if(nowMonth>2){ //아.. 2에서 1이되고 1에서는 이제 전년으로 넘어가야하니 등호빼고 엘스로 실행되야지
+        nowMonth=nowMonth-1
+        basicPrint(nowMonth,nowYear);
+        goToday.innerText=`${nowYear}.${nowMonth}`;
+        goPreMove.innerText=`${nowYear}.${nowMonth-1}`;
+        goNextMove.innerText=`${nowYear}.${nowMonth+1}`;
+        // console.log(nowMonth);
+    }
+    else if(nowMonth==2){
+        nowMonth=nowMonth-1
+        basicPrint(nowMonth,nowYear);
+        goToday.innerText=`${nowYear}.${nowMonth}`;
+        goPreMove.innerText=`${nowYear-1}.${nowMonth+11}`;
+        goNextMove.innerText=`${nowYear}.${nowMonth+1}`;
+    }
+    else{
+        nowMonth=nowMonth+11;
+        nowYear=nowYear-1;
+        console.log(nowMonth); //1을 받아서 +11 해야하니 12가 아니라 11
+        basicPrint(nowMonth,nowYear);
+        goToday.innerText=`${nowYear}.${nowMonth}`;
+        goPreMove.innerText=`${nowYear}.${nowMonth-1}`;
+        goNextMove.innerText=`${nowYear+1}.${nowMonth-11}`;
+    }
+}
+
+function change2(){
+    if(nowMonth<11){  
+        nowMonth=nowMonth+1
+        basicPrint(nowMonth,nowYear);
+        goToday.innerText=`${nowYear}.${nowMonth}`;
+        goPreMove.innerText=`${nowYear}.${nowMonth-1}`;
+        goNextMove.innerText=`${nowYear}.${nowMonth+1}`;
+        // console.log(nowMonth);
+    }
+    else if(nowMonth==11){//11에서 12가 되면 12부터는 다음해로 넘어가
+        nowMonth=nowMonth+1
+        basicPrint(nowMonth,nowYear);
+        goToday.innerText=`${nowYear}.${nowMonth}`;
+        goPreMove.innerText=`${nowYear}.${nowMonth-1}`;
+        goNextMove.innerText=`${nowYear+1}.${nowMonth-11}`;
+    }
+    else{
+        nowYear=nowYear+1;
+        nowMonth=nowMonth-11; //사실 이것들 이해안되도 만들어놓고 조정하면 +1, -1 정도는 간단히 맞춰짐
+        basicPrint(nowMonth,nowYear);
+        goToday.innerText=`${nowYear}.${nowMonth}`;
+        goPreMove.innerText=`${nowYear}.${nowMonth-1}`;
+        goNextMove.innerText=`${nowYear}.${nowMonth+1}`;
+    }
+}
+
+
+//==========================1==========================
+// 달력 생성 과정을 basicPrint함수로 묶어서 만들어주면 이후는 매개변수에 대입되는 대입값만 조절해주면 달력생성의 전체를 조절할 수 있게 되기 때문에 매우 유용하다
+
+// =========================2==========================
+// 대입값을 맘대로 조절할 수 있으려면 함수 밖에서 변수를 만들면서 그 초기값을 함수에 1차로 대입하고싶은 값으로 선언해둔다.
+
+// =========================3==========================
+// 좌, 우 인풋 태그에 온클릭을 주고 그 실행함수안에서 변수를 +1 or -1씩 조절해줄 수 있다면, basicPrint함수를 실행함수 안에 넣어 그 조절된 값이 들어가도록 실행식을 세운다.
+
+// =========================4==========================
+// 앞서 사고했듯 함수에 대입할 변수를 함수basicPrint 밖에서 먼저 선언하고 그 변수를 조절함으로써 함수를 조절할수 있게 되었다. 조절할 수 있게된 함수basicPrint를 적재적소의 함수(실행식)안에 넣어서 활용한다.
+
+
+let firstDay9=
+
+basicPrint(nowMonth,nowYear);
+function basicPrint(paraMonth,paraYear){
+
+        //9월의 마지막 일 구하기
+        let lastDate9=new Date(paraYear,paraMonth,0).getDate();
+        //9월의 시작 요일의 인덱스 구하기
+        let firstDay9=new Date(paraYear,paraMonth-1,1).getDay();
+        //8월의 마지막 일 구하기
+        let lastDate8=new Date(paraYear,paraMonth-1,0).getDate();
+
+
+        const d_={
+    9:{
+        13:{
+            430:"기상",
+            450:"에이콘 아카데미 출근",
+            1080:"에이콘 아카데미 퇴근",
+            1170:"집도착",
+            1320:"취침"
+        },
+        14:{
+            430:"기상2",
+            450:"에이콘 아카데미 출근2",
+            1080:"에이콘 아카데미 퇴근2",
+            1170:"집도착2",
+            1320:"취침2"
+            }
+        }
+    }
+    d_[9][13];
+  
+
+      // 이번달
+    for(let i=firstDay9,d=1; i<lastDate9+firstDay9; i++){
+        if( d_[paraMonth][d]){
+            li_html=""; 
+            for( timeKey in d_[paraMonth][d]){
+            li_html+="<li>"
+            li_html+="<b class='time'>";
+            li_html+=(Number.parseInt(timeKey/60)+"").padStart(2,0); //oh.. 새로 추가된 함수 padStart 길이가 2가 되도록 최대한 0을 채워라
+            li_html+=":"+(timeKey%60+"").padStart(2,0); //이게 위에 긴 코드보다 훨씬 좋네 -_-;;;;;;;;;
+            li_html+="</b>";
+            li_html+=`<span onclick='copyDown(event)' title='${timeKey}'>`;
+            li_html+=" "+d_[paraMonth][d][timeKey];
+            li_html+="</span>";
+            li_html+="</li>";
+            // console.log(li_html);
+            // console.log(tdList[d+firstDay9-1].querySelector(".schedule"));
+            tdList[d+firstDay9-1].querySelector(".schedule").innerHTML=li_html;
+            }
+        }
+        tdList[i].querySelector(".day").innerText=d++;
+        tdList[i].classList.add("active");
+        tdList[i].classList.remove("disabled");
+    }
+
+    // 지난달
+    for(let i=0, d=lastDate8-firstDay9+1; i<firstDay9; i++){  
+        tdList[i].querySelector(".day").innerText=d++;
+        tdList[i].classList.add("disabled");
+        // tdList[i].classList.remove("active"); //역시 이건 굳이 할 필요 없었네 근데 왜 이거 살려도 새로 정의되는 액티브들이 안지워지지?
+    }
+    
+    // 다음달
+    for(let i=firstDay9+lastDate9,c=1; i<tdList.length; i++){
+        tdList[i].querySelector(".day").innerText=c++;
+        tdList[i].classList.add("disabled");
+    }
+}
+
+
+</script>
+
+</html>

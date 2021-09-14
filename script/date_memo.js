@@ -114,6 +114,7 @@ function copyDown(xxx){
     let copyKey=xxx.target.title;
     let copyText=xxx.target.innerText;
     console.log(document.forms.insertSchedule.registTime.value);
+    
     document.forms.insertSchedule.registTime.value=(Number.parseInt(copyKey/60)+"").padStart(2,0)+":"+(copyKey%60+"").padStart(2,0);
     document.forms.insertSchedule.registText.value=copyText;
 };

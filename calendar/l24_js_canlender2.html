@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/calendar.css">
+    <link rel="stylesheet" href="./css/memo.css">
+    <!-- <script defer src="./script/date_memo.js" charset="utf-8"></script> -->
+    <script defer src="./script/calendar.js" charset="utf-8"></script>
+    <title>js calendar</title>
+  </head>
+  <body>
+  <h1>(일정 등록되는)달력 만들기</h1>
+    <!-- article.memo>div.container>(h3.title+ul.schedule>li) -->
+    <!-- table#calendarTable>thead>tr>th{일}+th{월}+th{화}+th{수}+th{목}+th{금}+th{토}^^tbody>tr*6>td*7>div.dayContainer>h5.day+article.memo>.container>ul.schedule>li -->
+      <div class="memo_container" style="width:800px; float:left">
+         <article id="memo" class="memo">
+            <div class="container">
+              <h3 class="title">2021년 9월 12일</h3>
+              <ul class="schedule">
+                <li></li>
+              </ul>
+            </div>
+          </article>
+          <form class="insert_schedule" name="insertSchedule">
+            <label>
+              <input type="time" name="registTime" value="09:00">
+            </label>
+            <label>
+              <input type="text" name="registText" value="일어나기">
+            </label>
+            <button type="button" name="regist" >스케줄추가</button>
+          </form>
+      </div>
+
+      <div class="calendar_container" style="width:800px;float:left">
+        <h2>
+           <button class="changeMonth" id="preMonth" type="button" value="2021-8">2021년 8월</button>
+           <span id="toDate">
+             2021년
+             9월
+           </span>
+           <button class="changeMonth" id="nextMonth" type="button" value="2021-10">2021년 10월</button>
+         </h2>
+
+        <table id="calendarTable">
+          <thead>
+            <tr>
+              <th>일</th>
+              <th>월</th>
+              <th>화</th>
+              <th>수</th>
+              <th>목</th>
+              <th>금</th>
+              <th>토</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+              <td>
+                <div class="dayContainer">
+                  <h5 class="day"></h5>
+                  <article class="memo">
+                    <div class="container">
+                      <ul class="schedule">
+                        <li></li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </body>
+<script>
+</script>
+</html>

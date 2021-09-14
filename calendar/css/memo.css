@@ -1,0 +1,51 @@
+/* 1. 고정된 width의 element에서 css로 text 처리방법
+width : 100px; (px을 고정 값으로 설정한다. 이는 자신이 원하는 만큼 설정하면 될것이다.)
+white-space : nowrap; (text의 길이가 길어지면 자동으로 줄이 바뀌는데 이를 한줄로 설정한다.)
+overflow : hidden; (width가 고정되어있는 상태에서 text가 길어지면 해당 element를 넘어서는데 이를 표시하지 않는다.)
+text-overflow : ellipsis; (넘어간 text대신 ...으로 text를 대체한다.)
+*/
+.memo .container {
+  width: 100%;
+  border: 1px solid black;
+  background-color: rgba(200, 200, 100, 0.8);
+  margin: auto;
+}
+.memo .title {
+  text-align: center;
+}
+.memo ul.schedule {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+.memo ul.schedule li {
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100px;
+  white-space: nowrap; /*두줄을 한줄로 걍 쭉*/
+  overflow: hidden; /*스크롤*/
+  text-overflow: ellipsis; /*넘어가는 텍스트 ...*/
+}
+.memo ul.schedule li:hover {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+.memo ul.schedule li .delete {
+  float: right;
+  margin-right: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 0;
+}
+.memo ul.schedule li .time {
+  float: left;
+  margin-left: 5px;
+}
+.memo ul.schedule li .delete:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px black;
+}
+.memo form.insert_schedule {
+  width: 200px;
+  margin: 20px auto 0;
+  text-align: center;
+  /* input 요소는 inline-block 속성으로 inline 속성인 글자와 같이 정렬된다. */
+}
