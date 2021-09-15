@@ -3,11 +3,22 @@
   border-collapse: collapse;
   width: 100%;
 }
+
+/* table은 가로크기가 가변이다 
+table-layout: auto 가 디폴트임.*/
+/* table-layout:fixed; 
+width:700px
+table>tr>td 직접적으로 가로를 지정하는게 좋다. */
+table#calendarTable {
+  table-layout: fixed;
+  width: 700px;
+}
+
 #calendarTable td,
 #calendarTable th {
-  width: 14.2%;
   border: 1px solid black;
   text-align: center;
+  width: 14.2%;
 }
 /* .ative : 활성화 된 td */
 #calendarTable td.active {
