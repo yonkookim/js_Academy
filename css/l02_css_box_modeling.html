@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <h1>박스 모델링</h1>
+    <div>
+        <h2>block의 박스 모델링(width height, padding, border, outline, margin)</h2>
+        <p style="
+        width: 200px; 
+        height: 200px; 
+        padding: 50px;
+        border: 1px solid rgb(61, 61, 238);
+        border-radius: 15px 100px 30px 5px;;
+        outline: 3px dotted rgb(212, 54, 54);
+        outline-offset: 20px;
+        margin: 50px auto;
+        ">p block : 가로세로 높이가 있고 margin으로 블럭을 정렬하는 성질이 있다.</p>
+    </div>
+    <div>
+        <h2>inline-block의 박스 모델링(inline:글씨같은 놈)</h2>
+        <h3>block속성과 같지만 margin으로 블럭을 정렬하지 못한다. 즉 auto가 X</h3>
+        안녕<img src="img/dog1.jfif" alt="" style="
+        width: 200px; 
+        height: 200px; 
+        padding: 50px;
+        border: 1px solid rgb(61, 61, 238);
+        outline: 3px dotted rgb(212, 54, 54);
+        outline-offset: 20px;
+        
+        ">~!!!
+    </div>
+    <br>
+    <br>
+    <div>
+        <h2>inline의 박스 모델링
+            가로, 세로, margin이 없다. 박스로 볼 수 없고 크기는 컨텐츠 크기만큼만 설정된다.
+        </h2>
+        <strong style="
+        padding: 50px;
+        border: 1px solid rgb(61, 61, 238);
+        outline: 3px dotted rgb(212, 54, 54);
+        outline-offset: 20px;
+        ">인라인 속성의 스트롱 태그</strong>
+    </div>
+    <hr style="margin:100px 0 0;">
+    <div>
+        <h2>border-radius</h2>
+        <p style="
+        width: 200px;
+        height: 150px;
+        padding: 50px;
+        border: 1px solid rgb(61, 61, 238);
+        outline: 3px dotted rgb(212, 54, 54);
+        outline-offset: 20px;
+        border-radius: 100%;
+        margin: 50px auto;
+        "></p>
+    </div>
+    <hr>
+    <div>
+        <h2>box-shadow : left top width color, ... (복수의 그림자 적용 가능)</h2>
+        <p style="
+        width: 200px; 
+        height: 200px; 
+        padding: 50px;
+        border: 1px solid rgb(61, 61, 238);
+        outline: 3px dotted rgb(212, 54, 54);
+        outline-offset: 20px;
+        border-radius: 100%;
+        margin: 50px auto;
+        background-color: rgba(240, 35, 35, 0.3);
+        box-shadow: inset -5px 0 10px rgb(160, 12, 12), 5px 0 10px blue;
+        text-shadow: 1px 1px 2px rgb(201, 184, 88);
+        ">box-shadow : left top width color, ... (복수의 그림자 적용 가능)</p>
+    </div>
+    <!-- inset좀 특이 음 이 주석 색깔 맘에 드는구만 ㅎㅎ -->
+</body>
+</html>

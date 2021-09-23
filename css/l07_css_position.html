@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>position</title>
+</head>
+<body>
+    <h1>position 요소, 노드 개체의 위치를 정의한다.(static, relative, absolute, fixed, sticky)</h1>
+    <article>
+        <h2>position: static(default)</h2>
+        <p>모든 요소, 노드 개체는 위치를 static을 기본으로 정의한다.</p>
+        <ul>
+            <li>요소의 위치는 순차적이며 왼쪽->오른쪽 순으로 배치</li>
+            <li>자식요소의 위치는 기본적으로 부모요소의 위치를 기준으로 배치된다.</li>
+            <li>top, bottom, left, right를 지정 할 수 있다.</li>
+            <li>다음 수행에서 애니메이션 효과가 조금 이상하게 먹는 것을 확인 할 수 있는데.. 이유는?</li>
+            <li>transition-property을 설정할 때 해당 노드에 top. left 속성의 설정이 들어가 있어야 효과가 먹힌다.</li>
+            <li>아.. 그래서 두번 이동하고 원점 이동할 때는 속성이 들어간 뒤이니 효과가 먹힌 것</li>
+        </ul>
+    </article>
+    <article>
+        <h2>position: relative(상대적 위치)</h2>
+        <div class="parent" 
+        style="width:200px; height:200px; background-color: gray;">
+            <div id="childBox0" 
+            style="width:150px; height:150px; background-color: rgba(0,0,0,.2); 
+            position: relative; transition-property: top, left; transition-duration: 2s;">relative
+            </div>
+        </div>
+        <br><br>
+        <p><button type="button" 
+            onclick="childBox0.style.top='100px'">아래로 100px 이동</button></p>
+        <p><button type="button"
+            onclick="childBox0.style.left='100px'">오른쪽으로 100px 이동</button></p>
+        <p><button type="button"
+            onclick="childBox0.style.left='0'; childBox0.style.top='0';">원점으로 이동</button></p>
+        <ul>
+            <li>position: relative는 static을 기준으로 노드를 이동시킬 수 있게 해준다.</li>
+        </ul>
+    </article>
+    <article>
+        <h2>position: absolute(절대적 위치)</h2>
+        <ul>
+            <li>'부모 노드'의 위치 설정이 static일때는</li>
+            <li>position: absolute인 자식노드 위치의 기준점은 root(최상위 부모) 노드인 body</li>
+            <br>
+            <li>'부모 노드'중에 위치가 static이 아닌 노드가 있을땐?</li>
+            <li>position: absolute인 자식노드 위치의 기준점은 해당하는 그 '부모 노드'가 된다.</li>
+        </ul>
+        <div class="parent" 
+            style="width:200px; height:200px; background-color: gray;">
+            <div id="childBox1" 
+            style="width:150px; height:150px; background-color: rgba(0,100,0,.2); 
+            position: absolute; top: 1100px; right:300px">absolute
+            </div>
+        </div>
+    </article>
+    <article>
+        <h2>position: absolute(부모의 위치가 static이 X)</h2>
+        <div class="parent" 
+        style="width:200px; height:200px; background-color: gray; position: relative;">
+            <div id="childBox2" 
+            style="width: 150px; height:150px; background-color: rgba(0,100,0,.2); 
+            position: absolute; top:0; left:0; transition-property: top, left; transition-duration: 2s;">absolute
+            </div>
+        </div>
+        <br><br>
+        <p><button type="button" 
+            onclick="childBox2.style.top='100px'">아래로 100px 이동</button></p>
+        <p><button type="button"
+            onclick="childBox2.style.left='100px'">오른쪽으로 100px 이동</button></p>
+        <p><button type="button"
+            onclick="childBox2.style.left='0'; childBox2.style.top='0';">원점으로 이동</button></p>
+    </article>
+    <article>
+        <h2>position: fixed</h2>
+        <ul>
+            <li>부모 요소와 관계없이 viewport(브라우저화면)을 기준으로 개체 위치를 고정시킨다.</li>
+            <li>fixed 역시 absolute 처럼 개체의 넓이와 높이가 content에 맞게 변경된다.</li>
+            <li>fixed 역시 absolute 처럼 순차적 흐름에서 벗어나 부유객체가 된다.</li>
+        </ul>
+        <div class="overflowParent"
+        style="width:300px; height:300px; border: 1px solid black; overflow: auto; position: relative; top:0;">
+        <h3 style="position: fixed; left: 400px; bottom: 0; background: black; color: white;">제목입니다.</h3>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        </div>
+    </article>
+    <article>
+        <h2>position: sticky</h2>
+        <ul>
+            <li>부모 노드가 스크롤을 가진 container일때는</li>
+            <li>자식 요소의 위치가 sticky이면 부모노드 안에서 sticky 기능이 작동한다.</li>
+        </ul>
+        <div class="overflowParent"
+        style="width:300px; height:300px; border: 1px solid black; overflow: auto; top:0;">
+        <h3 style="position: sticky; top:5px; bottom: 0; background: black; color: white;">제목입니다.</h3>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <p>별 내용 없음</p>
+        <h3 style="position: sticky; bottom:5px; bottom: 0; background: black; color: white;">제목입니다.</h3>
+    </div>
+    </article>
+</body>
+</html>

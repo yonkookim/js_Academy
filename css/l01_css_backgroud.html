@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+<style>
+body{
+    background-color: rgb(253, 218, 218);
+}
+</style>
+</head>
+<body>
+    <h1>style background</h1>
+    <ul>
+        <li>background-color</li>
+        <li>background-image : url("경로"), url("경로2"),...</li>
+        <li>background-position</li>
+        <li>background-size</li>
+        <li>background-repeat</li>
+        <li>background-origin</li>
+        <li>background-clip</li>
+        <li>background-attachment</li>
+    </ul>
+    
+    <hr>
+    <div class="">
+        <h2 style="border: 1px solid black;
+        border-left: 10px solid rgb(43, 27, 110);
+        outline-style: inset;
+        outline-color: royalblue;
+        "> img요소는 inline-block속성의 독립적인 노드 개체다.</h2>
+        <img src="./img/cat1.jpg" alt="cute cat" width="200px" height="200px">
+        안녕하세요
+    </div>
+
+    <hr>
+    <h2>background-image : 해당 요소의 스타일 속성, 이름부터 배경이미지
+        <br> (background-repeat: repeat(default값)</h2>
+    <div class="" style="
+    background-image: url(../css/img/cat2.jpg);  
+    width:100%; 
+    height:200px;
+    background-repeat: no-repeat;
+    ">
+    안녕하세요</div>
+
+    <hr>
+    <h2>background-size : 요소와 관계없이 이미지의 가로 세로 크기 설정
+        <br>(이미지가 여러개면 ,로 구분하여 설정을 따로 줄 수 있다.)
+    </h2>
+    <div class="" style="
+    background-image:  url(../css/img/cat3.jpg), url(../css/img/배경1.jpg);  
+    width:100%; 
+    height:300px;
+    background-size: 200px 250px, 100%;  
+    background-repeat: no-repeat;
+    ">
+    </div>
+
+    <hr>
+    <h2>background-contain : 이미지 비율을 유지하며 노드의 크기만큼 크기 조절
+       <br> (사진이 잘리지 X 때까지)</h2>
+    <div class="" style="
+    background-image: url(../css/img/cat3.jpg), url(../css/img/배경1.jpg);  
+    width:100%; 
+    height:300px;
+    background-size: contain;  
+    background-repeat: no-repeat;
+    ">
+   </div>
+
+    <hr>
+    <h2>background-cover : 이미지 비율을 유지하며 노드 전체를 덮을 만큼 크기 조절
+       <br> (사진이 자릴 수 O)</h2>
+    <div class="" style="
+    background-image: url(../css/img/cat3.jpg'), url('../css/img/배경1.jpg);  
+    width:100%; 
+    height:300px;
+    background-size: cover;  
+    background-repeat: no-repeat;
+    ">
+   </div>
+
+   <hr>
+    <div class="" style="
+    width: 300px;
+    height: 300px;
+    border: 20px solid rgb(27, 27, 27);
+    padding: 30px;
+    margin: 50px;
+    background-color: rgb(182, 181, 250);
+    background-clip: content-box;
+    ">
+     <h3>background-clip : content-box;
+        <br> background-color영역을 content영역으로 제한
+    </h3>
+   </div>
+
+   <hr>
+   <div class="" style="
+   width: 300px;
+   height: 300px;
+   border: 20px dotted rgb(27, 27, 27);
+   padding: 30px;
+   margin: 50px;
+   background-color: rgb(182, 181, 250);
+   background-clip: padding-box;
+   ">
+    <h3>background-clip: padding-box; 
+    <br>   background-color영역을 패딩까지
+    <br>   (border는 제외)
+   </h3>
+  </div>
+
+  <hr>
+   <div class="" style="
+   width: 300px;
+   height: 300px;
+   border: 20px dotted rgb(27, 27, 27);
+   padding: 30px;
+   margin: 50px;
+   background-color: rgb(182, 181, 250);
+   background-clip: border-box;
+   ">
+    <h3>background-clip: border-box; 
+    <br> background-color영역을 border까지
+    <br> (background의 default : content + padding + border)
+   </h3>
+  </div>
+
+  <hr>
+  <div class="" style="
+  width: 300px;
+  height: 300px;
+  border: 20px dotted rgb(27, 27, 27);
+  padding: 30px;
+  margin: 50px;
+  background-image: url(img/cat3.jpg);
+  background-origin: border-box;
+  ">
+ </div>
+
+ <hr>
+ <h3>background-origin: content-box;
+    <br>왼쪽 상단을 기준으로 border, padding, content중 어느 라인부터 시작할지 선택
+  
+   </h3>
+ <div class="" style="
+ width: 300px;
+ height: 300px;
+ border: 20px dotted rgb(27, 27, 27);
+ padding: 30px;
+ margin: 50px;
+ background-image: url(img/cat3.jpg);
+ background-origin: content-box;
+ background-repeat: no-repeat;
+ background-size: cover;
+ ">
+</div>
+<hr>
+<h3>background-position : left, right, center, px, % / top, bottom, center, px, %</h3>
+<div class="" style="
+width: 300px;
+height: 300px;
+border: 20px dotted rgb(27, 27, 27);
+padding: 30px;
+margin: 50px;
+background-image: url(img/cat3.jpg);
+background-repeat: no-repeat;
+background-size: 100px 150px;
+background-position: 70% calc(50% - 60px);
+">
+</div>
+<hr>
+<h3>background-attachment: fixed = 브라우저 화면을 기준으로 위치가 고정
+    <br>(결과적으로 이미지가 스크롤을 따라 움직인다.)
+</h3>
+<div class="" style="
+border: 1px solid rgb(27, 27, 27);
+width: 400px;
+height: 1000px;
+background-image: url(img/cat3.jpg);
+background-attachment: fixed;
+">
+<p style="
+background-color:red;
+position: relative;
+top: 20%;
+height: 300px;
+">빨간블럭</p>
+</div>
+<hr>
+<h3>background: bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;
+</h3>
+<div class="" style="
+border: 1px solid rgb(27, 27, 27);
+width: 400px;
+height: 1000px;
+background: rgb(182, 181, 250) url(img/cat3.jpg) no-repeat 20% 200px/200px auto fixed;
+position: relative;
+">
+<p style="
+background-color:red;
+position: relative;
+top: 20%;
+height: 300px;
+">빨간블럭</p>
+</div>
+</body>
+</html>
