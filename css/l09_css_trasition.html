@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css transition</title>
+</head>
+<style>
+    .box{
+        height: 150px;
+        color: white;
+        display: inline-block;
+        text-align: center;
+        background-color: green;
+    }
+    .container{
+        border: 1px solid;
+    }
+    .bg_red{
+        background-color:rgb(255,50,50)
+    }
+</style>
+<body>
+    <h1>transition으로 작은 애니메이션 만들기</h1>
+    <p>css property값이 변할 때 transition에 시간을 설정하여 애니메이션을 만든다.</p>
+    <p>이동하는 애니메이션을 만들고 싶으면 방법들은?</p>
+    <p>padding & background:clip , margin, position:relative & left</p>
+    <div class="container">
+        <div class="box" style="transition: background 300ms; width: 150px;"
+        onclick="boxColorChange(event)"> <!-- this.style.backgroundColor='red'를 onclick에 바로 줘도 먹혀-->
+            click -> red
+        </div>
+    </div>
+<script>
+    //목표!!: 누를 때마다 빨강, 기존색(green지정X), 빨강, 기존색 ... 계속 change 되도록
+
+    console.log(document.querySelector(".box").style.width); 
+    console.log(document.querySelector(".box").backgroundColor);
+    //이게 웃기는 것이.. 태그에서 직접 준 style속성값은 문제없이 받아오는 반면
+    // but 외부에서 준 속성, 즉 참조해 온 속성값은 받아오질 X
+
+    //이 문제 상황을 다음과 같이 해결 할 수 있음
+    const element = document.querySelector(".box");
+    const style = getComputedStyle(element);
+    console.log(style);
+    console.log(style.backgroundColor);
+    //★★★★ 외부의 style블럭에서 따로 준 속성값은 내장함수 getComputedStyle(요소); 이용 ★★★★
+    //이용하는 법은 위와 같다.
+
+    const originColor= style.backgroundColor;
+    console.log(originColor);
+
+    function boxColorChange(e){
+       if(e.target.style.backgroundColor=='rgb(255, 0, 0)'){
+           e.target.style.backgroundColor=originColor;
+       }
+       else{
+            e.target.style.backgroundColor='rgb(255,0,0)';
+            console.log(e.target.style.backgroundColor);
+       }
+       //이때도 특이한 것이 red일때는 쉽게 되는데 rgb(255,0,0)로 할 때는 안되네..? 무슨 차이지
+       //아하.. if 조건문은 정확히 띄어쓰기를 적용했어야 하네 rgb(255, 0, 0) ㅇㅋ ㅇㅋ!!
+    }
+</script>
+
+<!-- ----------------------------------------방법 2--------------------------------------- -->
+
+<div class="container">
+    <div class="box" id="colorChangeBox3" style="transition: background 1s; transition-delay: 2s; width: 150px;"> <!-- this.style.backgroundColor='red'를 onclick에 바로 줘도 먹혀-->
+        click -> red
+    </div>
+    <!-- transition-timeing-function: ~ ~ 이용해서 애니메이션 줄수도 O
+    site : cubic-tezier -->
+</div>
+<script>
+    colorChangeBox3.addEventListener("click", function(){
+        console.log(this.className);
+        // if(this.className=="box"){
+        //     this.className="box bg_red"
+        // }else{
+        //     this.className="box"
+        // }
+        // <=====>
+        // (this.className=="box")?this.className="box bg_red":this.className="box";
+        //(참고용....................................) 
+
+        this.classList.toggle("bg_red"); 
+        //와... 압도적으로 간단하네 ★★★★★★★★★★★★★★★★★★★★★★★★★
+    })
+</script>
+    <h2>과제: mouse point를 따라서 움직이는 박스 만들기</h2>
+    <p>relative사용?</p>
+
+</body>
+</html>

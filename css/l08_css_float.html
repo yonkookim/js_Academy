@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css float</title>
+</head>
+<style>
+    .container{
+        border: 1px solid;
+    }
+    .f_left{
+        float: left;
+    }
+    .f_right{
+        float: right;
+    }
+    .box{
+        width: 70px;
+        height: 70px;
+        border: 1px solid;
+        background-color: darkgray;
+        color: white;
+    }
+    .clearfix::after{
+        content: "";
+        clear:both;
+        display:table; /* 바닥 행의 공간을 안전하게 확보하기 위해.. block으로 줘도 되더라  */
+    }
+    li{
+        line-height: 30px;
+    }
+</style>
+<body>
+    <h1>css float로 블럭 정렬하기</h1>
+    <ul>
+        <li>float는 text가 여러 줄 있을 때 그 왼쪽 or 오른쪽에 블럭을 삽입하기 위해 쓰임</li>
+        <li>마치 position: absolute 처럼 부유객체 비슷하지만 text와 겹치지 않고 공간을 차지함.</li>
+        <li>text가 여러줄 있을 때는 display: inline-block을 사용하는 것은 적절치 X</li>
+        <li>inline-block은 말그대로 박스를 글자취급하여 박스의 좌우로 text가 달랑 한줄만 나란히 붙음.</li>
+    </ul>
+        <div class="logoImg" 
+        style="
+        width: 100px; 
+        height: 100px; 
+        background-color: rgb(211, 141, 141);
+        
+        ">
+            w3school
+        </div>
+        optio similique blanditiis odit repellat perferendis deleniti? Blanditiis laudantium repudiandae quod ad a, voluptas nisi quidem nesciunt dolorum vel, labore consequuntur harum. Odit voluptatum minus cum cupiditate quasi.
+        Id quibusdam accusamus perspiciatis at? Est eos aut repellat cupiditate exercitationem ipsum dolor quidem ipsa, soluta illum consectetur ratione in eaque, totam adipisci! Neque quod aspernatur quia ipsam qui atque?
+        Rerum numquam laudantium velit aliquid et deserunt consequuntur, dolore accusantium quod dolorem sunt minus aspernatur facere nesciunt doloremque, consectetur aperiam debitis magnam est incidunt, voluptas officia praesentium tenetur. Doloribus, perspiciatis.
+        Explicabo, consequuntur id quisquam dolorem vero voluptates rerum autem ab nemo eligendi aliquid fugiat totam voluptas commodi nam amet et adipisci voluptate, harum quae iusto tempore. Libero voluptates dolorum aliquam.
+        Corporis, veniam enim ullam quas soluta eos rerum et quam accusamus nostrum incidunt similique tenetur minus accusantium provident doloremque porro alias illum unde, beatae animi ab! Ex libero culpa omnis.
+        Iure sit soluta nostrum. Molestias, nemo esse dignissimos repellat sapiente laborum at sint quidem maxime, voluptate aspernatur eos. Aliquam vitae incidunt fugiat earum aperiam nihil et. Sed consectetur eius dolorem?
+        Ullam nulla eum aut vitae id. Quisquam ex nemo id placeat excepturi molestiae dolorum voluptatibus sunt iusto mollitia et dolore esse quaerat iste veniam earum neque a, consequatur accusamus! Iure.
+    </article>
+    <br>
+    <br>
+    <br>
+    <article>
+        <h2>float가 가진 문제</h2>
+        <ul>
+            <li>float블럭은 그것을 담은 container(부모노드)가 컨텐츠로 인식하지 못한다.</li>
+            <li>뿐만 아니라 그 형제노드 들 역시 컨텐츠로 인식하지 못한다</li>
+            <li>float블럭 끼리는 서로를 인식하지만 위치관계를 조절하기 쉽지X</li>
+        </ul>
+        <div class="container" style="height:50px">
+            <div class="box f_left">
+                float-left
+            </div>
+        </div>
+    <br>
+    <br>
+            <div class="box f_left">
+                float-left
+            </div>
+            <div class="container" style="height:30px">
+                float블럭의 형제노드1
+            </div>
+            <div class="box f_right">
+                float블럭의 형제노드2
+            </div>
+    </article>
+    <br>
+    <br>
+    <br>
+    <article>
+        <h2>해결사 clear</h2>
+        <ul>
+            <li>형제노드가 float를 컨텐츠로 인지하지 못하는 문제 해결</li>
+            <li>clear: left/right/both</li>
+            <li>부모노드가 인식하지 못하는 문제는 전혀 해결하지 X</li>
+            <li>why? 인식은 하는듯 하지만, 공간을 확보하여 담아내는 작업을 수행하지 X</li>
+        </ul>
+        <div class="box f_left">
+            float:left
+        </div>
+        <div class="container" style="clear:left">
+            형제 컨테이너
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="container" style="clear:left">
+            부모 컨테이너
+            <div class="box f_left">
+                float:left
+            </div>
+        </div>
+    </article>
+    <br>
+    <br>
+    <article>
+        <h2>해결사 over flow</h2>
+        <ul>
+            <li>부모노드가 float를 컨텐츠로 인지하지 못하는 문제 해결</li>
+            <li>visible을 제외한 속성값을 주면 OK</li>
+        </ul>
+        <div class="container" style="overflow: auto;">
+            <div class="box f_left">
+                float:left
+            </div>
+        </div>
+    </article>
+    <br>
+    <br>
+    <article>
+        <h2>해결사 inline-block</h2>
+        <ul>
+            <li>부모노드가 float를 컨텐츠로 인지하지 못하는 문제 해결</li>
+            <li>how? 위에서 봤듯 TEXT는 float블럭을 인식한다. </li>
+            <li>then, 부모노드를 inline블럭으로 만들면 TEXT가 그랬듯 인식할 수 있게 된다.</li>
+        </ul>
+        <div class="container"
+        style="display: inline-block; width: 100%;">
+            <div class="box f_left">
+                float:left
+            </div>
+        </div>
+    </article>
+    <article>
+        <h2>해결사 clearfix::after</h2>
+        <ul>
+            <li>부모노드가 float를 컨텐츠로 인지하지 못하는 문제 해결</li>
+            <li>유사클래스 ::after를 이용하여 컨테이너의 바닥공간을 확보한다.</li>
+            <li>how? clear:both(인식) -> content(공간확보) -> display(확실히)</li>
+        </ul>
+        <div class="clearfix container"
+        style="display: inline-block; width: 100%;">
+            <div class="box f_left">
+                float:left
+            </div>
+        </div>
+    </article>
+    <article>
+        <h2>Box정렬 with Float, Inline-block</h2>
+        <div class="clearfix container">
+            <div class="box f_left"></div>
+            <div class="box f_left"></div>
+            <div class="box f_right"></div>
+            <div class="box f_right"></div>
+        </div>
+
+        <div class="clearfix container">
+            <div class="box" style="width: 30%; display: inline-block;"></div>
+            <div class="box" style="width: 50%; display: inline-block;"></div>
+        </div>
+    </article>
+</body>
+</html>

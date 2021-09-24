@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .container{
+        border: 1px solid;
+    }
+    .box{
+        width: 70px;
+        height: 70px;
+        background: khaki;
+        box-shadow: 5px 3px 5px rgb(97, 84, 40);
+        position: relative;
+        transition: transform 1s;
+        left: 0; /*transition에서 left를 잘 먹게 하려면 초기값 설정 필요하다 했지*/
+        text-align: center;
+        color: white;
+    }
+    .container.D3{
+        perspective: 300px; /*컨테이너를 기준으로 300PX떨어진 곳을 관점으로*/
+    }
+    .container.D3 .box{  /*클래스에서 클래스를 찾을 때는 붙여 써도 되는구나*/
+        border-color: red;
+        transform: rotateZ(30deg); /*화면에 수직인 축이 Z이므로 회전시켜봐야 시계방향*/
+        transform: rotateX(60deg);
+        transform: rotateY(60deg);
+        /* transform: rotateY(0deg); 다음 실습을 위해서 Y방향 0.. 근데 선택자를 잘 주면 .continer.D3 .X:hover 이런식 */
+        display: inline-block;
+        margin: 5px 20px;
+    }
+    .continer.D3 .X:hover{
+        transform: rotateX(180deg); /*이건 또 왜 안돼 음.. 집에서 수정 확인 해보자*/
+    }
+    .continer.D3 .Y:hover{
+        transform: rotateY(180deg);
+    }
+    .continer.D3 .X:hover{
+        transform: rotateZ(180deg);
+    }
+    
+</style>
+<body>
+    <h1>transform</h1>
+    <h2>2D</h2>
+    <div class="container">
+        <div class="box"
+        onclick="this.style.transform='scale(2,2) translate(200%,0) rotate(360deg)'">
+            scale(2,2);
+        </div>
+    </div>
+
+    <h2>3D</h2>
+    <div class="container D3">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <br>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <br>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <h2>3D transition</h2>
+    <div class="container D3">
+        <div class="box X"></div>
+        <div class="box Y"></div>
+        <div class="box Z" onclick="this.style.transform='rotateZ(360deg)'"></div>
+    </div>
+</body>
+</html>

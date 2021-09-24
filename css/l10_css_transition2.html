@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container{
+        border: 1px solid;
+    }
+    .box{
+        width: 70px;
+        height: 70px;
+        background: khaki;
+        box-shadow: 5px 3px 5px rgb(97, 84, 40);
+        position: relative;
+        transition-property: box-shadow, left;
+        transition-duration: 2s, 1s; /*애니메이션 효과 적용 시간도 서로 다르게.. ㅇㅋ*/
+        left: 0; /*transition에서 left를 잘 먹게 하려면 초기값 설정 필요하다 했지*/
+        text-align: center;
+        color: white;
+    }
+    .box:active{
+        left: 100%;
+        box-shadow: -5px 3px 5px rgb(97, 84, 40);
+    }
+    .progress{
+        width: 0;
+        background: rgba(63, 146, 58, 0.3);
+        border-radius: 5px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 15px;
+        font-weight: bold;
+        transition-property: width;
+        transition-duration: 3000ms;
+        border: 2px solid rgb(104, 143, 104);
+    }
+    #progressTest{
+        border-radius: 5px;
+    }
+</style>
+<body>
+    <h1>transition이론 & 타이밍 함수</h1>
+    <ul>
+        <li>transition-property: 애니메이션이 가능한 css 속성(default: all)</li>
+        <li>transition-duration: 트렌지션이 일어나는 시간, s(초) or ms(밀리초)로 지정</li>
+        <li>transition-delay: 트렌지션이 시작되기 전 대기하는 시간</li>
+        <li>transition-timing-function: transition효과와 관련하여 속도를 함수로 지정</li>
+        <li>https://cubic-bezier.com/ : cubic-bezier(), ease, linear, ease-in, ease-out, ease-in-out</li>
+    </ul>
+    <article>
+        <h2>transition-timing-function Test</h2>
+        <div class="container">
+            <div class="box"></div>
+            <div class="box" style="transition-timing-function: ease;">ease</div>
+            <div class="box" style="transition-timing-function: linear;">linear</div>
+            <div class="box" style="transition-timing-function: ease-in;">ease-in</div>
+            <div class="box" style="transition-timing-function: ease-out;">ease-out</div>
+            <div class="box" style="transition-timing-function: ease-in-out;">ease-in-out</div>
+            <div class="box" style="transition-timing-function: cubic-bezier(.53,1.81,1,-1.2);">cubic-bezier</div>
+        </div>
+    </article>
+
+    <article>
+        <h2>ProgressBar feat.dataset</h2>
+        <ul>
+            <li>dataset : 개발자가 요소에 직접 지정한 속성</li>
+            <li>속성지정: 태그에 직접줄 때 data-속성이름="속성값"</li>
+            <li>불러오기: element.dataset.속성이름 or element.dataset['속성이름']</li>
+            <li>노드를 제어하는 방법으로 value가 쓰인 것 처럼, dataset을 유용하게 쓸 수 O</li>
+            <li>예) 속성이름:key-goo -----> 불러오기: keyGoo</li>
+        </ul>
+        <div class="container" id="progressTest">
+            <div class="progress 80" id="dataTest" data-percent="80">
+                80%
+            </div>
+        </div>
+<script>
+    console.log(dataTest.dataset.percent);
+    progressTest.addEventListener("mouseenter",function(){
+        console.log(this);
+        let p_width=this.querySelector(".progress").dataset.percent;
+        console.log(p_width);
+        this.querySelector(".progress").style.width=p_width+'%';
+    });
+</script>
+    </article>
+</body>
+</html>
